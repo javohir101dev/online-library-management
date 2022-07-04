@@ -13,7 +13,7 @@ public class UserRepository {
     public User addUser(User user) {
         String INSERT_USER = "insert into users(firstname, lastName, username, password, account, role)" +
                 " VALUES\n" +
-                "    (?, ?, ?, ?, ?, ? ) ; ";
+                "    (?, ?, ?, ?, ?, ? ) ";
         try (Connection connection = new DBConnection().getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(INSERT_USER,  Statement.RETURN_GENERATED_KEYS);
         ) {
@@ -50,6 +50,7 @@ public class UserRepository {
                 String firstname = resultSet.getString("firstname");
                 String lastName = resultSet.getString("lastName");
                 String username = resultSet.getString("username");
+                String phoneNumber = resultSet.getString("phone_number");
                 String password = resultSet.getString("password");
                 Double account = resultSet.getDouble("account");
                 String role = resultSet.getString("role");
@@ -57,6 +58,7 @@ public class UserRepository {
                         firstname,
                         lastName,
                         username,
+                        phoneNumber,
                         password,
                         account,
                         role);
@@ -78,13 +80,14 @@ public class UserRepository {
         String GET_USER_BY_ID = "select * from users where id = " + userId;
         try (Connection connection = new DBConnection().getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(GET_USER_BY_ID);
+             ResultSet resultSet = statement.executeQuery(GET_USER_BY_ID)
         ) {
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String firstname = resultSet.getString("firstname");
                 String lastName = resultSet.getString("lastName");
                 String username = resultSet.getString("username");
+                String phoneNumber = resultSet.getString("phone_number");
                 String password = resultSet.getString("password");
                 Double account = resultSet.getDouble("account");
                 String role = resultSet.getString("role");
@@ -92,6 +95,7 @@ public class UserRepository {
                         firstname,
                         lastName,
                         username,
+                        phoneNumber,
                         password,
                         account,
                         role);
@@ -112,18 +116,19 @@ public class UserRepository {
      */
     public User updateUserById(Integer userId, User user) {
     String UPDATE_USER_BY_ID = "update users set firstname = ?, " +
-            "lastName = ?, username = ?, password = ?, account = ?, role = ? \n" +
+            "lastName = ?, username = ?, phone_number = ?, password = ?, account = ?, role = ? \n" +
             "where id = ? ; ";
     try (Connection connection = new DBConnection().getConnection();
-         PreparedStatement prepareStatement = connection.prepareStatement(UPDATE_USER_BY_ID, Statement.RETURN_GENERATED_KEYS);
+         PreparedStatement prepareStatement = connection.prepareStatement(UPDATE_USER_BY_ID, Statement.RETURN_GENERATED_KEYS)
     ) {
         prepareStatement.setString(1, user.getFirstname());
         prepareStatement.setString(2, user.getLastName());
         prepareStatement.setString(3, user.getUsername());
         prepareStatement.setString(4, user.getPassword());
-        prepareStatement.setDouble(5, user.getAccount());
-        prepareStatement.setString(6, user.getRole());
-        prepareStatement.setInt(7, userId);
+        prepareStatement.setString(5, user.getPassword());
+        prepareStatement.setDouble(6, user.getAccount());
+        prepareStatement.setString(7, user.getRole());
+        prepareStatement.setInt(8, userId);
         prepareStatement.execute();
         ResultSet generatedKeys = prepareStatement.getGeneratedKeys();
         if (generatedKeys.next()){
@@ -147,7 +152,7 @@ public class UserRepository {
     public boolean deleteUserById(Integer userId) {
     String DELETE_USER_BY_ID = "delete FROM users where id = ? ;";
     try (Connection connection = new DBConnection().getConnection();
-         PreparedStatement prepareStatement = connection.prepareStatement(DELETE_USER_BY_ID, Statement.RETURN_GENERATED_KEYS);
+         PreparedStatement prepareStatement = connection.prepareStatement(DELETE_USER_BY_ID, Statement.RETURN_GENERATED_KEYS)
     ) {
         prepareStatement.setInt(1, userId);
         prepareStatement.execute();
