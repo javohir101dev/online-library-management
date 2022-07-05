@@ -14,6 +14,7 @@ public class Book {
     private Double cost;
     private String genre;
     private Integer pageCount;
-    private Integer numberOfBooks;
+    private Integer totalNumberOfBooks;
+    private Integer leftNumberOfBooks;
     private Integer authorId;
 }
