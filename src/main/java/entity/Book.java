@@ -17,4 +17,14 @@ public class Book {
     private Integer totalNumberOfBooks;
     private Integer leftNumberOfBooks;
     private Integer authorId;
+
+    public Book(String name, Double cost, String genre, Integer pageCount, Integer totalNumberOfBooks, Integer leftNumberOfBooks, Integer authorId) {
+        this.name = name;
+        this.cost = cost;
+        this.genre = genre;
+        this.pageCount = pageCount;
+        this.totalNumberOfBooks = totalNumberOfBooks;
+        this.leftNumberOfBooks = leftNumberOfBooks;
+        this.authorId = authorId;
+    }
 }
