@@ -19,7 +19,7 @@ public class DateHelper {
     }
 
     /**
-     * Returns null if format cannot be parsed or inlaid otherwise java.util.Date
+     * Returns null if format cannot be parsed with form(yyyy-MM-dd) or inlaid otherwise java.util.Date
      * @param dateString
      * @return java.util.Date
      */

@@ -15,8 +15,9 @@ public class BookUserUserRepository {
 //        for (BookUser allBookUser : repository.findAllBookUsers()) {
 //            System.out.println(allBookUser);
 //        }
-        BookUser bookUser = new BookUser(null, null, 7,2,7,false);
-        System.out.println(repository.addBookUser(bookUser));
+        BookUser bookUser = new BookUser(new java.util.Date(), null, 4, 2, 5, false);
+//        System.out.println(repository.addBookUser(bookUser));
+        System.out.println(repository.findAllBookUsers());
     }
 
     //    CREATE
@@ -46,7 +47,7 @@ public class BookUserUserRepository {
         return bookUser;
     }
 
-//        READ
+    //        READ
     public List<BookUser> findAllBookUsers() {
         List<BookUser> bookUserList = new ArrayList<>();
         String GET_ALL_BOOK_USERS = "select * from book_user";

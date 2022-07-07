@@ -21,7 +21,6 @@ public class UserRegister extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         try {
             String firstname = req.getParameter("firstname");
             String lastName = req.getParameter("lastName");
@@ -35,11 +34,8 @@ public class UserRegister extends HttpServlet {
             if (responseDto.isSuccess()) {
                 resp.sendRedirect("/user/login");
             }
-
         } catch (Exception e) {
             resp.getWriter().write("Please enter valid fields");
         }
-
-
     }
 }

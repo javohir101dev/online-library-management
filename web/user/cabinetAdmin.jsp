@@ -14,12 +14,24 @@
 
 <h1>Welcome your personal cabinet ${user.firstname} ${user.lastName} </h1>
 
-<form action="/book" method="post"><button type="submit">Add Book</button></form>
-<form action="/book" method="post"><button type="submit">Remove Book</button></form>
-<form action="/book" method="post"><button type="submit">Add Author</button></form>
-<form action="/book" method="post"><button type="submit">Remove Author</button></form>
-<form action="/book" method="post"><button type="submit">Add Book to User</button></form>
-<form action="/book" method="post"><button type="submit">Remove Book from User</button></form>
+<form action="/book" >
+    <button type="submit">Add Book</button>
+</form>
+<form action="/book" method="get">
+    <button type="submit">Remove Book</button>
+</form>
+<form action="/book" method="get">
+    <button type="submit">Add Author</button>
+</form>
+<form action="/book" method="get">
+    <button type="submit">Remove Author</button>
+</form>
+<form action="/book-user/add" method="get">
+    <button type="submit">Add Book to User</button>
+</form>
+<form action="/book" method="get">
+    <button type="submit">Remove Book from User</button>
+</form>
 
 </body>
 </html>

@@ -1,3 +1,5 @@
+create database online_library_management;
+
 -- Creating author table in database
 create table author
 (
