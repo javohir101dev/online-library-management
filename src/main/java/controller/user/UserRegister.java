@@ -1,6 +1,7 @@
 package controller.user;
 
 import entity.User;
+import entity.enums.Roles;
 import model.ResponseDto;
 import repository.UserRepository;
 import service.UserService;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static entity.enums.Roles.USER;
 
 @WebServlet("/user/register")
 public class UserRegister extends HttpServlet {
@@ -26,16 +29,16 @@ public class UserRegister extends HttpServlet {
             String phoneNumber = req.getParameter("phoneNumber");
             String password = req.getParameter("password");
             Double account = Double.valueOf(req.getParameter("account"));
-            User user = new User(firstname, lastName,  username,  phoneNumber, password, account, "USER");
+//          if user registers it will be automatically registered with USER role
+            User user = new User(firstname, lastName, username, phoneNumber, password, account, USER.name());
             ResponseDto responseDto = userService.registerUser(user);
-            if (responseDto.isSuccess()){
+            if (responseDto.isSuccess()) {
                 resp.sendRedirect("/user/login");
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             resp.getWriter().write("Please enter valid fields");
         }
-
 
 
     }
