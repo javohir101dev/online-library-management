@@ -1,4 +1,4 @@
-package entity;
+package model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,18 +8,13 @@ import lombok.NoArgsConstructor;
 import java.sql.Date;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class Author {
+public class AuthorDto {
     private Integer id;
     private String firstname;
     private String lastName;
     private Date birthDate;
 
-    public Author(String firstname, String lastName, Date birthDate) {
-        this.firstname = firstname;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-    }
 }

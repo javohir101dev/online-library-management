@@ -1,5 +1,7 @@
 package helper;
 
+import helper.messages.AppMessage;
+import model.AuthorDto;
 import model.BookDto;
 import model.ValidDto;
 import repository.AuthorRepository;
@@ -44,5 +46,39 @@ public class Validation {
             errors.add(new ValidDto("pageCount",NEGATIVE_ERROR));
         return errors;
     }
+
+
+    public static List<ValidDto> checkAuthorDto(AuthorDto authorDto)
+    {
+        List<ValidDto> errors = new ArrayList<>();
+
+        if(authorDto.getFirstname() ==null)
+            errors.add(new ValidDto("firstName", AppMessage.EMPTY));
+        else if(authorDto.getFirstname().trim().equals(""))
+            errors.add(new ValidDto("firstName", AppMessage.EMPTY));
+
+        if(authorDto.getLastName() ==null)
+            errors.add(new ValidDto("lastName",AppMessage.EMPTY));
+        else if(authorDto.getLastName().trim().equals(""))
+            errors.add(new ValidDto("lastName", AppMessage.EMPTY));
+        if(DateHelper.checkDate(String.valueOf(authorDto.getBirthDate())))
+            errors.add(new ValidDto("birthDate",AppMessage.DATE_FORMAT_ERROR));
+        return errors;
+    }
+    public static List<ValidDto> checkBook(BookDto bookDto)
+    {
+        List<ValidDto> errors = new ArrayList<>();
+        if(bookDto.getName().trim().equals(""))
+            errors.add(new ValidDto("name",AppMessage.EMPTY));
+        else if(bookDto.getName()==null)
+            errors.add(new ValidDto("name",AppMessage.EMPTY));
+
+        if(bookDto.getGenre().trim().equals(""))
+            errors.add(new ValidDto("genre",AppMessage.EMPTY));
+        else if(bookDto.getGenre()==null)
+            errors.add(new ValidDto("genre",AppMessage.EMPTY));
+        return errors;
+    }
+
 
 }

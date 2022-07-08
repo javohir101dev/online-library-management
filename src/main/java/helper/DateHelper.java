@@ -35,6 +35,20 @@ public class DateHelper {
         }
     }
 
+    public static boolean checkDate(String s)
+    {
+        String a = "YYYY-mm-DD HH-MM-SS";
+        SimpleDateFormat formater = new SimpleDateFormat(a);
+        try {
+            Date date = (Date) formater.parse(s);
+            return true;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
     public static Date toSqlDateFromString(String dateString){
         return toSqlDate(toUtilDate(dateString));
     }
