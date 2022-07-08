@@ -14,7 +14,7 @@
 
 <h1>Welcome your personal cabinet ${user.firstname} ${user.lastName} </h1>
 
-<form action="/book" >
+<form action="/book">
     <button type="submit">Add Book</button>
 </form>
 <form action="/book" method="get">
@@ -29,7 +29,7 @@
 <form action="/book-user/add" method="get">
     <button type="submit">Add Book to User</button>
 </form>
-<form action="/book" method="get">
+<form action="/book-user/take" method="get">
     <button type="submit">Remove Book from User</button>
 </form>
 

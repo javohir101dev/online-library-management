@@ -16,7 +16,6 @@
     Username of user <input type="text" name="username" placeholder="Username of user"><br>
     Id og given book <input type="text" name="bookId" placeholder="Id of given book"><br>
     Number of books <input type="text" name="numberOfBooks" placeholder="Number of books"><br>
-    Returned date of books(yyyy-MM-dd) <input type="text" name="returnDate" placeholder="Returned date"><br>
     <button type="submit">Add</button>
 </form>
 
