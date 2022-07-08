@@ -16,7 +16,9 @@
 <H1>List of books</H1>
 
 <c:forEach items="${books}" var="book">
-    ${book} <br>
+    Id : ${book.id} Name: ${book.name} Cost: ${book.cost} Genre: ${book.genre}  Pages: ${book.pageCount} <br>
+    Total Numbers: ${book.totalNumberOfBooks} Left Numbers: ${book.leftNumberOfBooks}
+    Author: ${book.authorId} <p>
 </c:forEach>
 
 

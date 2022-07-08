@@ -41,7 +41,7 @@ public class BookRepository {
     //    READ
     public List<Book> findAllBooks() {
         List<Book> bookList = new ArrayList<>();
-        String GET_ALL_BOOKS = "select * from book";
+        String GET_ALL_BOOKS = "select * from book order by id ";
 
         try (Connection connection = new DBConnection().getConnection();
              Statement statement = connection.createStatement();

@@ -14,12 +14,12 @@ import java.io.IOException;
 import static helper.DoubleHelper.checkDouble;
 import static helper.IntegerHelper.isDigit;
 
-@WebServlet("/book/register")
-public class BookControllerUpdate extends HttpServlet {
+@WebServlet("/book/edit")
+public class BookControllerEdit extends HttpServlet {
     private BookService bookService = new BookService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("book/updateBook.jsp");
+        resp.sendRedirect("/book/editBook.jsp");
     }
 
     @Override

@@ -4,7 +4,7 @@
     <title>Book Updating</title>
 </head>
 <body>
-<form action="/book/update" method="put">
+<form action="/book/update" method="post">
     Id Book <input name="IdBook" type="text" placeholder="Id Book">
     Name book <input name="NameBook" type="text" placeholder="Name book"><br>
     Cost <input name="Cost" type="text" placeholder="Cost"><br>
