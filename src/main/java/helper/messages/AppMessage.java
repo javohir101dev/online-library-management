@@ -11,5 +11,6 @@ public class AppMessage {
     public static final String NEGATIVE_ERROR = "Field below one";
     public static final String OK = "OK";
     public static final String VALID_ERROR = "Validation error";
+    public static final String ERROR = "Something went wrong. Please try again!";
 
 }

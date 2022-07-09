@@ -7,8 +7,9 @@ import mapper.BookMapper;
 import model.BookDto;
 import model.ResponseDto;
 import model.ValidDto;
-import repository.AuthorRepository;
-import repository.BookRepository;
+import mapper.repository.AuthorRepository;
+import mapper.repository.BookRepository;
+import mapper.repository.BookUserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,8 @@ import static helper.Validation.checkIsNegative;
 public class BookService {
     private BookRepository bookRepository = new BookRepository();
     private AuthorRepository authorRepository = new AuthorRepository();
+
+    private BookUserRepository bookUserRepository = new BookUserRepository();
 
     public ResponseDto<BookDto> addBook(BookDto bookDto) {
         List<ValidDto> errors = checkIsNegative(bookDto);
@@ -56,7 +59,7 @@ public class BookService {
             if (errors.size() > 0) {
                 return new ResponseDto<>(false, errors.toString());
             }
-            if (bookDto.getLeftNumberOfBooks() > bookDto.getTotalNumberOfBooks()){
+            if (bookDto.getLeftNumberOfBooks() > bookDto.getTotalNumberOfBooks()) {
                 return new ResponseDto<>(false,
                         "Left number of books cannot be greater than total number of books",
                         bookDto);
@@ -70,11 +73,22 @@ public class BookService {
         }
     }
 
-    public ResponseDto<String> delete(Integer id) {
-        if (bookRepository.findById(id) == null)
+    public ResponseDto<?> delete(Integer bookId) {
+        Book bookById = bookRepository.findById(bookId);
+        if (bookById == null) {
             return new ResponseDto<>(false, AppMessage.ID_IS_NOT_FOUND);
-        bookRepository.deleteBookById(id);
-        return new ResponseDto<>(true, AppMessage.OK, AppMessage.OK);
+        }
+        String username = bookUserRepository.usersBookByBookId(bookId);
+        if (username != null){
+            return new ResponseDto<>(false,
+                    String
+                            .format("Book with %s is must be taken first from user with username: %s",
+                                    bookId, username));
+        }
+
+        bookRepository.deleteBookById(bookId);
+        return new ResponseDto<>(true,
+                String.format("Book %s is deleted successfully", bookById));
     }
 
     public ResponseDto<List<BookDto>> getAll() {

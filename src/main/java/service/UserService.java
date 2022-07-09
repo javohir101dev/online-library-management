@@ -4,8 +4,7 @@ package service;
 import entity.User;
 import model.LoginUserDto;
 import model.ResponseDto;
-import repository.BookRepository;
-import repository.UserRepository;
+import mapper.repository.UserRepository;
 
 public class UserService {
 

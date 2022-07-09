@@ -24,7 +24,7 @@ public class BookControllerEdit extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             String id = req.getParameter("IdBook");
             String bookName = req.getParameter("NameBook");
@@ -53,7 +53,7 @@ public class BookControllerEdit extends HttpServlet {
                 resp.getWriter().write("Please enter valid field for Author Id");
             } else if (!costBol) {
                 resp.getWriter().write("Please enter valid field for Cost");
-                resp.setStatus(400, "BAD REQUEST");
+                resp.sendError(400, "BAD REQUEST");
             } else {
                 BookDto bookDto = BookDto.builder()
                         .id(Integer.parseInt(id))

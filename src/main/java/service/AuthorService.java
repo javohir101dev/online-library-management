@@ -7,7 +7,7 @@ import mapper.AuthorMapper;
 import model.AuthorDto;
 import model.ResponseDto;
 import model.ValidDto;
-import repository.AuthorRepository;
+import mapper.repository.AuthorRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

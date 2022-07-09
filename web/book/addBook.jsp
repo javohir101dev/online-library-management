@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form action="/book" method="post">
+<form action="/book/add" method="post">
     Name book <input name="NameBook" type="text" placeholder="Name book"><br>
     Cost <input name="Cost" type="text" placeholder="Cost"><br>
     Genre <input name="genre" type="text" placeholder="Genre"><br>

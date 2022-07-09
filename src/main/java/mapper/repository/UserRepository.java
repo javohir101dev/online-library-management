@@ -1,4 +1,4 @@
-package repository;
+package mapper.repository;
 
 import entity.User;
 import helper.DBConnection;

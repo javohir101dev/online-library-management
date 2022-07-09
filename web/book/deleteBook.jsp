@@ -7,9 +7,9 @@
     <title>Delete book</title>
 </head>
 <body>
-<form action="/book/delete" method="delete">
+<form action="/book/delete" method="post">
     Id Book <input name="IdBook" type="text" placeholder="Id Book">
-    <button type="submit">Add</button>
+    <button type="submit">Delete</button>
 </form>
 </body>
 </html>

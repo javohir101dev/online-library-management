@@ -1,9 +1,7 @@
 package controller.user;
 
 import entity.User;
-import entity.enums.Roles;
 import model.ResponseDto;
-import repository.UserRepository;
 import service.UserService;
 
 import javax.servlet.ServletException;

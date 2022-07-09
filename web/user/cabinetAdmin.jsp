@@ -44,7 +44,7 @@
     <button type="submit">Add Book to User</button>
 </form>
 <form action="/book-user/take" method="get">
-    <button type="submit">Remove Book from User</button>
+    <button type="submit">Take Book from User</button>
 </form>
 
 </body>

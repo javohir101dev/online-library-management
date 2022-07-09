@@ -1,4 +1,4 @@
-package repository;
+package mapper.repository;
 
 import entity.BookUser;
 import helper.DBConnection;
@@ -17,7 +17,8 @@ public class BookUserRepository {
 //        }
         BookUser bookUser = new BookUser(new java.util.Date(), null, 4, 2, 5, false);
 
-        System.out.println(repository.findByUserIdAndBookId(5, 3));
+        System.out.println(repository.usersBookByBookId(1
+        ));
 
     }
 
@@ -99,6 +100,31 @@ public class BookUserRepository {
             throw new RuntimeException(ex);
         }
         return count;
+    }
+
+    /**
+     * Returns username if user have taken book with given id otherwise null
+     * @param bookId id of book
+     * @return username
+     */
+    public String usersBookByBookId(Integer bookId) {
+        String username = null;
+        String USERS_BOOK_BY_BOOK_ID = "select u.username from book b inner join book_user\n" +
+                " bu on b.id = bu.bookId\n" +
+                " inner join users u on bu.userId = u.id\n" +
+                " where b.id = " + bookId + " limit 1 ";
+        try (Connection connection = new DBConnection().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(USERS_BOOK_BY_BOOK_ID);
+        ) {
+            if (resultSet.next()) {
+                username = resultSet.getString("username");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex);
+        }
+        return username;
     }
 
     /**
