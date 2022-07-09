@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form action="/author/delete" method="delete">
+<form action="/author/delete" method="post">
     firstName <input name="IdAuthor" type="text" placeholder="Id Delete"><br>
     <button type="submit">Add</button>
 </form>

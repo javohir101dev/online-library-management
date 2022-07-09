@@ -31,11 +31,17 @@
 
 <H2>Author</H2>
 <br>
-<form action="/book" method="get">
+<form action="/author/get" method="get">
+    <button type="submit">Gel Authors</button>
+</form>
+<form action="/author/add" method="post">
     <button type="submit">Add Author</button>
 </form>
-<form action="/book" method="get">
-    <button type="submit">Remove Author</button>
+<form action="/author/edit" method="post">
+    <button type="submit">Edit Author</button>
+</form>
+<form action="/author/delete" method="post">
+    <button type="submit">Delete Author</button>
 </form>
 
 

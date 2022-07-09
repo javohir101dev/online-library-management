@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form action="/author" method="post">
+<form action="/author/add" method="post">
     firstName <input name="firstName" type="text" placeholder="Name"><br>
     lastName <input name="lastName" type="text" placeholder="Surname"><br>
     birthdate <input name="birthdate" type="text" placeholder="Birthday"><br>

@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 import static helper.Validation.checkAuthorDto;
 
 public class AuthorService {
-    private AuthorRepository authorRepository;
+    private AuthorRepository authorRepository = new AuthorRepository();
+
     public ResponseDto<AuthorDto> addBook(AuthorDto authorDto) {
         List<ValidDto> errors = checkAuthorDto(authorDto);
         if (errors.size() > 0)
@@ -23,15 +24,15 @@ public class AuthorService {
 
         try {
             Author author = AuthorMapper.toEntity(authorDto);
-           Author author1= authorRepository.addAuthor(author);
+            Author author1 = authorRepository.addAuthor(author);
             return new ResponseDto<>(true, AppMessage.OK, AuthorMapper.toDto(author1));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseDto<>(false, AppMessage.SAVE_ERROR);
         }
     }
-    public ResponseDto<AuthorDto> update(AuthorDto authorDto)
-    {
+
+    public ResponseDto<AuthorDto> update(AuthorDto authorDto) {
         try {
             if (authorRepository.finfById(authorDto.getId()) == null)
                 return new ResponseDto<>(false, AppMessage.ID_IS_NOT_FOUND);
@@ -41,31 +42,30 @@ public class AuthorService {
 
             Author author = authorRepository.updateAuthorById(authorDto.getId(), AuthorMapper.toEntity(authorDto));
             return new ResponseDto<>(true, AppMessage.OK, AuthorMapper.toDto(author));
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseDto<>(false,AppMessage.DATA_BASE_ERROR);
+            return new ResponseDto<>(false, AppMessage.DATA_BASE_ERROR);
         }
     }
-    public ResponseDto<String> delete(Integer id)
-    {
-       if(authorRepository.finfById(id)==null)
-            return new ResponseDto<>(false,AppMessage.ID_IS_NOT_FOUND);
-       authorRepository.deleteAuthorById(id);
-       return new ResponseDto<>(true, AppMessage.OK);
+
+    public ResponseDto<String> delete(Integer id) {
+        if (authorRepository.finfById(id) == null)
+            return new ResponseDto<>(false, AppMessage.ID_IS_NOT_FOUND);
+        authorRepository.deleteAuthorById(id);
+        return new ResponseDto<>(true, AppMessage.OK);
     }
-    public ResponseDto<List<AuthorDto>> getAll()
-    {
+
+    public ResponseDto<List<AuthorDto>> getAll() {
         List<Author> authorList = authorRepository.getAllAuthors();
-        List<AuthorDto> authorDtos =authorList.stream()
+        List<AuthorDto> authorDtos = authorList.stream()
                 .map(AuthorMapper::toDto)
                 .collect(Collectors.toList());
-        return new ResponseDto<>(true, AppMessage.OK,authorDtos);
+        return new ResponseDto<>(true, AppMessage.OK, authorDtos);
     }
-    public ResponseDto<AuthorDto> getById(Integer id)
-    {
-        Author author=authorRepository.finfById(id);
+
+    public ResponseDto<AuthorDto> getById(Integer id) {
+        Author author = authorRepository.finfById(id);
         return author == null ? new ResponseDto<>(false, AppMessage.ID_IS_NOT_FOUND) :
-                new ResponseDto<>(true, AppMessage.OK,AuthorMapper.toDto(author));
+                new ResponseDto<>(true, AppMessage.OK, AuthorMapper.toDto(author));
     }
 }

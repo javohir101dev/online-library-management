@@ -7,6 +7,7 @@ public class AuthorMapper {
     public static AuthorDto toDto(Author author)
     {
         return author==null ? null : AuthorDto.builder()
+                .id(author.getId())
                 .firstname(author.getFirstname())
                 .lastName(author.getLastName())
                 .birthDate(author.getBirthDate())

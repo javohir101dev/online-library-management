@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form action="/author/register" method="put">
+<form action="/author/edit" method="put">
     firstName <input name="id" type="text" placeholder="Id"><br>
     firstName <input name="firstName" type="text" placeholder="Name"><br>
     lastName <input name="lastName" type="text" placeholder="Surname"><br>

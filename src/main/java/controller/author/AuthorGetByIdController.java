@@ -15,7 +15,7 @@ public class AuthorGetByIdController extends HttpServlet {
     private AuthorService authorService =new AuthorService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("author/getAuthor.jsp");
+        resp.sendRedirect("author/getAllAuthors.jsp");
     }
 
     @Override
