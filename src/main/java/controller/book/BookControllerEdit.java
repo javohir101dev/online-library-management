@@ -47,8 +47,7 @@ public class BookControllerEdit extends HttpServlet {
                 resp.getWriter().write("Please enter valid field for Total Number of Books");
             } else if (!leftCountValid) {
                 resp.getWriter().write("Please enter valid field for Left Number of Books");
-            }
-            else if (!pageCountBol) {
+            } else if (!pageCountBol) {
                 resp.getWriter().write("Please enter valid field for Page Count");
             } else if (!authorIdBol) {
                 resp.getWriter().write("Please enter valid field for Author Id");
