@@ -5,9 +5,9 @@ import entity.BookUser;
 import entity.User;
 import model.BookUserDto;
 import model.ResponseDto;
-import mapper.repository.BookRepository;
-import mapper.repository.BookUserRepository;
-import mapper.repository.UserRepository;
+import repository.BookRepository;
+import repository.BookUserRepository;
+import repository.UserRepository;
 
 import java.util.Date;
 

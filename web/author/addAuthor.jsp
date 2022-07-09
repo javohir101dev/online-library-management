@@ -6,10 +6,9 @@
 <body>
 
 <form action="/author/add" method="post">
-    firstName <input name="firstName" type="text" placeholder="Name"><br>
-    lastName <input name="lastName" type="text" placeholder="Surname"><br>
-    birthdate <input name="birthdate" type="text" placeholder="Birthday"><br>
-
+    First Name <input name="firstName" type="text" placeholder="First Name"><br>
+    Last Name <input name="lastName" type="text" placeholder="Last Name"><br>
+    Birth Date <input name="birthdate" type="text" placeholder="yyyy-MM-dd"><br>
     <button type="submit">Add</button>
 </form>
 

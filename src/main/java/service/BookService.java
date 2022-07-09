@@ -7,9 +7,9 @@ import mapper.BookMapper;
 import model.BookDto;
 import model.ResponseDto;
 import model.ValidDto;
-import mapper.repository.AuthorRepository;
-import mapper.repository.BookRepository;
-import mapper.repository.BookUserRepository;
+import repository.AuthorRepository;
+import repository.BookRepository;
+import repository.BookUserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

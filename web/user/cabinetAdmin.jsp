@@ -34,13 +34,13 @@
 <form action="/author/get" method="get">
     <button type="submit">Gel Authors</button>
 </form>
-<form action="/author/add" method="post">
+<form action="/author/add" method="get">
     <button type="submit">Add Author</button>
 </form>
-<form action="/author/edit" method="post">
+<form action="/author/edit" method="get">
     <button type="submit">Edit Author</button>
 </form>
-<form action="/author/delete" method="post">
+<form action="/author/delete" method="get">
     <button type="submit">Delete Author</button>
 </form>
 

@@ -1,4 +1,4 @@
-package mapper.repository;
+package repository;
 
 import entity.BookUser;
 import helper.DBConnection;
@@ -104,6 +104,7 @@ public class BookUserRepository {
 
     /**
      * Returns username if user have taken book with given id otherwise null
+     *
      * @param bookId id of book
      * @return username
      */
@@ -126,6 +127,8 @@ public class BookUserRepository {
         }
         return username;
     }
+
+
 
     /**
      * returns null if bookUser with given userId and bookId is not found

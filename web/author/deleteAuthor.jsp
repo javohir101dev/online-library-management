@@ -6,8 +6,8 @@
 <body>
 
 <form action="/author/delete" method="post">
-    firstName <input name="IdAuthor" type="text" placeholder="Id Delete"><br>
-    <button type="submit">Add</button>
+    firstName <input name="authorId" type="text" placeholder="Id Delete"><br>
+    <button type="submit">Delete</button>
 </form>
 
 </body>

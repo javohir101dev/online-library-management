@@ -4,7 +4,7 @@ import helper.messages.AppMessage;
 import model.AuthorDto;
 import model.BookDto;
 import model.ValidDto;
-import mapper.repository.AuthorRepository;
+import repository.AuthorRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +61,7 @@ public class Validation {
             errors.add(new ValidDto("lastName",AppMessage.EMPTY));
         else if(authorDto.getLastName().trim().equals(""))
             errors.add(new ValidDto("lastName", AppMessage.EMPTY));
-        if(DateHelper.checkDate(String.valueOf(authorDto.getBirthDate())))
+        if(!DateHelper.checkDate(String.valueOf(authorDto.getBirthDate())))
             errors.add(new ValidDto("birthDate",AppMessage.DATE_FORMAT_ERROR));
         return errors;
     }

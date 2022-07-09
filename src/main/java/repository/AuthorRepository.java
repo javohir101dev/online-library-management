@@ -1,4 +1,4 @@
-package mapper.repository;
+package repository;
 
 import entity.Author;
 import helper.DBConnection;
@@ -123,7 +123,7 @@ public class AuthorRepository {
 //    DELETE
     /**
      *
-     * @param authorId
+     * @param authorId authorId
      * @return boolean
      * returns true if author is deleted otherwise false
      */
@@ -144,4 +144,29 @@ public class AuthorRepository {
         }
         return false;
     }
+
+    /**
+     * Returns bookId by author(id author is used in that book) id otherwise null
+     * @param authorId id of author
+     * @return bookId or null
+     */
+    public Integer authorBookWithAuthorId(Integer authorId) {
+        Integer bookId = null;
+        String AUTHOR_BOOK_BY_BOOK_ID = " select b.id from book b " +
+                " inner join author a on a.id = b.author_id " +
+                " where a.id = " + authorId + " order by b.id limit 1 ;";
+        try (Connection connection = new DBConnection().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(AUTHOR_BOOK_BY_BOOK_ID);
+        ) {
+            if (resultSet.next()) {
+                bookId = resultSet.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex);
+        }
+        return bookId;
+    }
+
 }
