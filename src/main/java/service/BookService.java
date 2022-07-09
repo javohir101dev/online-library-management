@@ -23,7 +23,7 @@ public class BookService {
         List<ValidDto> errors = checkIsNegative(bookDto);
         if (errors.size() > 0)
             return new ResponseDto<>(false, "Valid Error", null, errors);
-        if (authorRepository.getAuthorById(bookDto.getAuthorId()) == null)
+        if (authorRepository.finfById(bookDto.getAuthorId()) == null)
             return new ResponseDto<>(false,
                     String.format("Author with id: %s is not found",
                             bookDto.getAuthorId())
@@ -44,15 +44,26 @@ public class BookService {
     public ResponseDto<BookDto> update(BookDto bookDto) {
         try {
 
-
-            if (bookRepository.findById(bookDto.getId()) == null)
-                return new ResponseDto<>(false, AppMessage.ID_IS_NOT_FOUND);
+            if (bookRepository.findById(bookDto.getId()) == null) {
+                return new ResponseDto<>(false, String.
+                        format("Book with given id: %s is not found", bookDto.getId()));
+            }
+            if (authorRepository.finfById(bookDto.getAuthorId()) == null) {
+                return new ResponseDto<>(false, String.
+                        format("Author with given id: %s is not found", bookDto.getId()));
+            }
             List<ValidDto> errors = Validation.checkBook(bookDto);
-            if (errors.size() > 0)
-                return new ResponseDto<>(false, AppMessage.VALID_ERROR, errors);
-
+            if (errors.size() > 0) {
+                return new ResponseDto<>(false, errors.toString());
+            }
+            if (bookDto.getLeftNumberOfBooks() > bookDto.getTotalNumberOfBooks()){
+                return new ResponseDto<>(false,
+                        "Left number of books cannot be greater than total number of books",
+                        bookDto);
+            }
             bookRepository.updateBookById(bookDto.getId(), BookMapper.toBook(bookDto));
-            return new ResponseDto<>(true, AppMessage.OK, bookDto);
+            return new ResponseDto<>(true,
+                    "Book is edited successfully", bookDto);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseDto<>(false, AppMessage.DATA_BASE_ERROR);

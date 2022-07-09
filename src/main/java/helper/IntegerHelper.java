@@ -1,14 +1,14 @@
 package helper;
 
 public class IntegerHelper {
-    public static boolean isDigit(String value)
-    {
+    public static boolean isDigit(String value) {
         try {
-            Integer.parseInt(value);
-            return true;
-        }
-        catch (Exception e)
-        {
+            int i = Integer.parseInt(value);
+            if (i > -1) {
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
             return false;
         }
     }

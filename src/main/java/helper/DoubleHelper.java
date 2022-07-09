@@ -4,8 +4,11 @@ public class DoubleHelper {
     public static boolean checkDouble(String value)
     {
         try {
-            Double.parseDouble(value);
-            return true;
+            double val = Double.parseDouble(value);
+            if (val > -1){
+                return true;
+            }
+            return false;
         }catch (Exception e)
         {
             e.printStackTrace();

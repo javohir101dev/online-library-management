@@ -65,7 +65,7 @@ public class AuthorRepository {
      * @return Author or null
      * returns null if author with given id is not found
      */
-    public Author getAuthorById(Integer authorId) {
+    public Author finfById(Integer authorId) {
         String GET_AUTHOR_BY_ID = "select * from author where id = " + authorId;
         try (Connection connection = new DBConnection().getConnection();
              Statement statement = connection.createStatement();

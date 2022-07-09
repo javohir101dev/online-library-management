@@ -33,7 +33,7 @@ public class AuthorService {
     public ResponseDto<AuthorDto> update(AuthorDto authorDto)
     {
         try {
-            if (authorRepository.getAuthorById(authorDto.getId()) == null)
+            if (authorRepository.finfById(authorDto.getId()) == null)
                 return new ResponseDto<>(false, AppMessage.ID_IS_NOT_FOUND);
             List<ValidDto> errors = Validation.checkAuthorDto(authorDto);
             if (errors.size() > 0)
@@ -49,7 +49,7 @@ public class AuthorService {
     }
     public ResponseDto<String> delete(Integer id)
     {
-       if(authorRepository.getAuthorById(id)==null)
+       if(authorRepository.finfById(id)==null)
             return new ResponseDto<>(false,AppMessage.ID_IS_NOT_FOUND);
        authorRepository.deleteAuthorById(id);
        return new ResponseDto<>(true, AppMessage.OK);
@@ -64,7 +64,7 @@ public class AuthorService {
     }
     public ResponseDto<AuthorDto> getById(Integer id)
     {
-        Author author=authorRepository.getAuthorById(id);
+        Author author=authorRepository.finfById(id);
         return author == null ? new ResponseDto<>(false, AppMessage.ID_IS_NOT_FOUND) :
                 new ResponseDto<>(true, AppMessage.OK,AuthorMapper.toDto(author));
     }
