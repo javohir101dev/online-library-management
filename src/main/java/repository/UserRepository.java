@@ -11,9 +11,9 @@ public class UserRepository {
 
     //    CREATE
     public User addUser(User user) {
-        String INSERT_USER = "insert into users(firstname, lastName, username, phone_number, password, account, role)" +
+        String INSERT_USER = "insert into users(firstname, lastName, username, phone_number, password, role)" +
                 " VALUES\n" +
-                "    (?, ?, ?, ?, ?, ?, ? ) ";
+                "    (?, ?, ?, ?, ?, ? ) ";
         try (Connection connection = new DBConnection().getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(INSERT_USER,  Statement.RETURN_GENERATED_KEYS);
         ) {
@@ -22,8 +22,7 @@ public class UserRepository {
             prepareStatement.setString(3, user.getUsername());
             prepareStatement.setString(4, user.getUsername());
             prepareStatement.setString(5, user.getPassword());
-            prepareStatement.setDouble(6, user.getAccount());
-            prepareStatement.setString(7, user.getRole());
+            prepareStatement.setString(6, user.getRole());
             prepareStatement.execute();
             ResultSet generatedKeys = prepareStatement.getGeneratedKeys();
             if (generatedKeys.next()){
@@ -53,7 +52,6 @@ public class UserRepository {
                 String username = resultSet.getString("username");
                 String phoneNumber = resultSet.getString("phone_number");
                 String password = resultSet.getString("password");
-                Double account = resultSet.getDouble("account");
                 String role = resultSet.getString("role");
                 User user = new User(id,
                         firstname,
@@ -61,7 +59,6 @@ public class UserRepository {
                         username,
                         phoneNumber,
                         password,
-                        account,
                         role);
                 userList.add(user);
             }
@@ -90,7 +87,6 @@ public class UserRepository {
                 String username = resultSet.getString("username");
                 String phoneNumber = resultSet.getString("phone_number");
                 String password = resultSet.getString("password");
-                Double account = resultSet.getDouble("account");
                 String role = resultSet.getString("role");
                 return new User(id,
                         firstname,
@@ -98,7 +94,6 @@ public class UserRepository {
                         username,
                         phoneNumber,
                         password,
-                        account,
                         role);
             }
         } catch (SQLException ex) {
@@ -126,7 +121,6 @@ public class UserRepository {
                 String _username = resultSet.getString("username");
                 String phoneNumber = resultSet.getString("phone_number");
                 String password = resultSet.getString("password");
-                Double account = resultSet.getDouble("account");
                 String role = resultSet.getString("role");
                 return new User(id,
                         firstname,
@@ -134,7 +128,6 @@ public class UserRepository {
                         _username,
                         phoneNumber,
                         password,
-                        account,
                         role);
             }
         } catch (SQLException ex) {
@@ -146,14 +139,13 @@ public class UserRepository {
 
 //    UPDATE
     /**
-     *
      * @param userId
      * @param user
      * @return null if user is not found with given is otherwise updated us
      */
     public User updateUserById(Integer userId, User user) {
     String UPDATE_USER_BY_ID = "update users set firstname = ?, " +
-            "lastName = ?, username = ?, phone_number = ?, password = ?, account = ?, role = ? \n" +
+            "lastName = ?, username = ?, phone_number = ?, password = ?, role = ? \n" +
             "where id = ? ; ";
     try (Connection connection = new DBConnection().getConnection();
          PreparedStatement prepareStatement = connection.prepareStatement(UPDATE_USER_BY_ID, Statement.RETURN_GENERATED_KEYS)
@@ -163,9 +155,8 @@ public class UserRepository {
         prepareStatement.setString(3, user.getUsername());
         prepareStatement.setString(4, user.getPhoneNumber());
         prepareStatement.setString(5, user.getPassword());
-        prepareStatement.setDouble(6, user.getAccount());
-        prepareStatement.setString(7, user.getRole());
-        prepareStatement.setInt(8, userId);
+        prepareStatement.setString(6, user.getRole());
+        prepareStatement.setInt(7, userId);
         prepareStatement.execute();
         ResultSet generatedKeys = prepareStatement.getGeneratedKeys();
         if (generatedKeys.next()){

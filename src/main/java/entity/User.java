@@ -14,16 +14,14 @@ public class User {
     private String username;
     private String phoneNumber;
     private String password;
-    private Double account;
     private String role;
 
-    public User(String firstname, String lastName, String username, String phoneNumber, String password, Double account, String role) {
+    public User(String firstname, String lastName, String username, String phoneNumber, String password, String role) {
         this.firstname = firstname;
         this.lastName = lastName;
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.account = account;
         this.role = role;
     }
 }

@@ -18,7 +18,6 @@
     <input name="username" type="text" placeholder="Username"><br>
     <input name="phoneNumber" type="text" placeholder="Phone Number"><br>
     <input name="password" type="password" placeholder="Password"><br>
-    <input name="account" type="text" placeholder="Account"><br>
     <button type="submit">Register</button>
 </form>
 </body>

@@ -2,6 +2,7 @@ package repository;
 
 import entity.Book;
 import helper.DBConnection;
+import model.UsersBook;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -110,8 +111,8 @@ public class BookRepository {
     }
 
 //    UPDATE
+
     /**
-     *
      * @param bookId id of book
      * @param book
      * @return null if book is not found with given is otherwise updated us
@@ -133,7 +134,7 @@ public class BookRepository {
             prepareStatement.setInt(8, bookId);
             prepareStatement.execute();
             ResultSet generatedKeys = prepareStatement.getGeneratedKeys();
-            if (generatedKeys.next()){
+            if (generatedKeys.next()) {
                 Integer id = generatedKeys.getInt(1);
                 book.setId(id);
             }
@@ -141,12 +142,12 @@ public class BookRepository {
             ex.printStackTrace();
             throw new RuntimeException(ex);
         }
-        return book.getId()== null ? null : book ;
+        return book.getId() == null ? null : book;
     }
 
 //    DELETE
+
     /**
-     *
      * @param bookId id of deleted book
      * @return boolean
      * returns true if book is deleted otherwise false
@@ -159,7 +160,7 @@ public class BookRepository {
             prepareStatement.setInt(1, bookId);
             prepareStatement.execute();
             ResultSet generatedKeys = prepareStatement.getGeneratedKeys();
-            if (generatedKeys.next()){
+            if (generatedKeys.next()) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -167,5 +168,47 @@ public class BookRepository {
             throw new RuntimeException(ex);
         }
         return false;
+    }
+
+    /**
+     * returns users books list
+     *
+     * @param userId id of user
+     * @return List<UsersBook>
+     */
+    public List<UsersBook> usersBooksByUserId(Integer userId) {
+        String GET_USERS_BOOKS_BY_USER_ID = "select b.id,b.name, b.genre, b.page_count, b.cost, a.firstname || ' ' || a.lastname as author " +
+                " from book b " +
+                "         inner join author a on a.id = b.author_id " +
+                " inner join book_user bu on bu.bookid = b.id " +
+                " inner join users u on u.id = bu.userId " +
+                " where u.id = " + userId +
+                " order by b.id;";
+        List<UsersBook> bookList = new ArrayList<>();
+        try (Connection connection = new DBConnection().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(GET_USERS_BOOKS_BY_USER_ID)
+        ) {
+
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String genre = resultSet.getString("genre");
+                int pageCount = resultSet.getInt("page_count");
+                double cost = resultSet.getDouble("cost");
+                String author = resultSet.getString("author");
+                UsersBook usersBook = new UsersBook(id,
+                        name,
+                        genre,
+                        pageCount,
+                        cost,
+                        author);
+                bookList.add(usersBook);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex);
+        }
+        return bookList;
     }
 }

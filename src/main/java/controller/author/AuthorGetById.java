@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/author/getById")
-public class AuthorGetByIdController extends HttpServlet {
+public class AuthorGetById extends HttpServlet {
     private AuthorService authorService =new AuthorService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

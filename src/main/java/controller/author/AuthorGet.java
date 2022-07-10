@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/author/get")
-public class AuthorGetController extends HttpServlet {
+public class AuthorGet extends HttpServlet {
     private AuthorService authorService = new AuthorService();
 
     @Override

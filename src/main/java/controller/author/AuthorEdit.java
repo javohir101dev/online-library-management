@@ -2,7 +2,6 @@ package controller.author;
 
 import helper.DateHelper;
 import helper.IntegerHelper;
-import helper.messages.AppMessage;
 import model.AuthorDto;
 import model.ResponseDto;
 import service.AuthorService;
@@ -19,7 +18,7 @@ import java.sql.Date;
 import static helper.messages.AppMessage.ERROR;
 
 @WebServlet("/author/edit")
-public class AuthorEditController extends HttpServlet {
+public class AuthorEdit extends HttpServlet {
     private AuthorService authorService = new AuthorService();
 
     @Override

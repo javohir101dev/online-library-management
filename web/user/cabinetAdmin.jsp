@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<h1>Welcome your personal cabinet ${user.firstname} ${user.lastName} </h1>
+<h1>Welcome to your Admin panel ${user.firstname} ${user.lastName} </h1>
 
 <H2>Book</H2>
 <form action="/book/add">

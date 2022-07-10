@@ -16,7 +16,7 @@ import java.sql.Date;
 import static helper.messages.AppMessage.ERROR;
 
 @WebServlet("/author/add")
-public class authorAddController extends HttpServlet {
+public class authorAdd extends HttpServlet {
     private AuthorService authorService = new AuthorService();
 
     @Override
