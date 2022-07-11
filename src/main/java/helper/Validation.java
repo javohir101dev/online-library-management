@@ -1,5 +1,6 @@
 package helper;
 
+import entity.User;
 import helper.messages.AppMessage;
 import model.AuthorDto;
 import model.BookDto;
@@ -94,4 +95,23 @@ public class Validation {
         }
         return errors;
     }
+
+    public static List<ValidDto> validateUser(User user) {
+        List<ValidDto> errors = new ArrayList<>();
+
+        if (!StringHelper.isValid(user.getFirstname())) {
+            errors.add(new ValidDto("firstname", EMPTY));
+        } else if (!StringHelper.isValid(user.getLastName())) {
+            errors.add(new ValidDto("lastName", EMPTY));
+        } else if (!StringHelper.isValid(user.getUsername())) {
+            errors.add(new ValidDto("username", EMPTY));
+        } else if (!StringHelper.isValid(user.getPhoneNumber())) {
+            errors.add(new ValidDto("phoneNumber", EMPTY));
+        } else if (!StringHelper.isValid(user.getPassword())) {
+            errors.add(new ValidDto("password", EMPTY));
+        }
+        return errors;
+    }
+
+
 }
