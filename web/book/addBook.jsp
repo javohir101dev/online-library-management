@@ -15,7 +15,7 @@
 <form action="/book/add" method="post">
     Name book <input name="NameBook" type="text" placeholder="Name book"><br>
     Cost <input name="Cost" type="text" placeholder="Cost"><br>
-    Genre <input name="genre" type="text" placeholder="Genre"><br>
+    Genre Id <input name="genreId" type="text" placeholder="Genre Id"><br>
     Page count <input name="PageCount" type="text" placeholder="Page count"><br>
     Number of Books <input name="TotalCount" type="text" placeholder="Number of Books"><br>
     AuthorId <input name="AuthorId" type="text" placeholder="AuthorId"><br>

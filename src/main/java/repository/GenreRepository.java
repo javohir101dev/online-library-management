@@ -1,6 +1,5 @@
 package repository;
 
-import entity.Author;
 import entity.Genre;
 import helper.DBConnection;
 
@@ -61,7 +60,7 @@ public class GenreRepository {
         return false;
     }
 
-    public Genre getById(Integer id) {
+    public Genre findById(Integer id) {
         String GET_BY_ID_QUERY = "SELECT * FROM genre WHERE id= " + id;
         try (Connection connection = new DBConnection().getConnection();
              Statement statement = connection.createStatement();

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/book/getById")
+@WebServlet("/book/findById")
 public class BookGetByIdController extends HttpServlet {
     private BookService bookService =new BookService();
     @Override

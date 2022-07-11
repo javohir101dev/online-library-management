@@ -13,7 +13,7 @@ public class BookRepository {
 
     //    CREATE
     public Book addBook(Book book) {
-        String INSERT_BOOK = "insert into book(name, cost, genre, page_count, total_number_of_books, left_number_of_books, author_id)" +
+        String INSERT_BOOK = "insert into book(name, cost, genre_id, page_count, total_number_of_books, left_number_of_books, author_id)" +
                 " VALUES\n" +
                 "    (?, ?, ?, ?, ?, ?, ?) ";
         try (Connection connection = new DBConnection().getConnection();
@@ -21,7 +21,7 @@ public class BookRepository {
         ) {
             prepareStatement.setString(1, book.getName());
             prepareStatement.setDouble(2, book.getCost());
-            prepareStatement.setString(3, book.getGenre());
+            prepareStatement.setInt(3, book.getGenreId());
             prepareStatement.setInt(4, book.getPageCount());
             prepareStatement.setInt(5, book.getTotalNumberOfBooks());
             prepareStatement.setInt(6, book.getLeftNumberOfBooks());
@@ -52,7 +52,7 @@ public class BookRepository {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 Double cost = resultSet.getDouble("cost");
-                String genre = resultSet.getString("genre");
+                Integer genreId = resultSet.getInt("genre_id");
                 Integer pageCount = resultSet.getInt("page_count");
                 Integer totalNumberOfBooks = resultSet.getInt("total_number_of_books");
                 Integer leftNumberOfBooks = resultSet.getInt("left_number_of_books");
@@ -60,7 +60,7 @@ public class BookRepository {
                 Book book = new Book(id,
                         name,
                         cost,
-                        genre,
+                        genreId,
                         pageCount,
                         totalNumberOfBooks,
                         leftNumberOfBooks,
@@ -89,7 +89,7 @@ public class BookRepository {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 Double cost = resultSet.getDouble("cost");
-                String genre = resultSet.getString("genre");
+                Integer genreId = resultSet.getInt("genre_id");
                 Integer pageCount = resultSet.getInt("page_count");
                 Integer totalNumberOfBooks = resultSet.getInt("total_number_of_books");
                 Integer leftNumberOfBooks = resultSet.getInt("left_number_of_books");
@@ -97,7 +97,7 @@ public class BookRepository {
                 return new Book(id,
                         name,
                         cost,
-                        genre,
+                        genreId,
                         pageCount,
                         totalNumberOfBooks,
                         leftNumberOfBooks,
@@ -119,14 +119,14 @@ public class BookRepository {
      */
     public Book updateBookById(Integer bookId, Book book) {
         String UPDATE_BOOK_BY_ID = "update book set name = ?, " +
-                "cost = ?, genre = ?, page_count = ?, total_number_of_books = ?, left_number_of_books = ?, author_id = ? \n" +
+                "cost = ?, genre_id = ?, page_count = ?, total_number_of_books = ?, left_number_of_books = ?, author_id = ? \n" +
                 "where id = ? ; ";
         try (Connection connection = new DBConnection().getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(UPDATE_BOOK_BY_ID, Statement.RETURN_GENERATED_KEYS)
         ) {
             prepareStatement.setString(1, book.getName());
             prepareStatement.setDouble(2, book.getCost());
-            prepareStatement.setString(3, book.getGenre());
+            prepareStatement.setInt(3, book.getGenreId());
             prepareStatement.setInt(4, book.getPageCount());
             prepareStatement.setInt(5, book.getTotalNumberOfBooks());
             prepareStatement.setInt(6, book.getLeftNumberOfBooks());

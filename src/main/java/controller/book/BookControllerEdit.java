@@ -29,7 +29,7 @@ public class BookControllerEdit extends HttpServlet {
             String id = req.getParameter("IdBook");
             String bookName = req.getParameter("NameBook");
             String cost = req.getParameter("Cost");
-            String genre = req.getParameter("genre");
+            String genreId = req.getParameter("genreId");
             String pageCount = req.getParameter("PageCount");
             String totalNumberOfBooks = req.getParameter("TotalCount");
             String leftCount = req.getParameter("leftCount");
@@ -37,11 +37,14 @@ public class BookControllerEdit extends HttpServlet {
 
             boolean costBol = checkDouble(cost);
             boolean total = isDigit(totalNumberOfBooks);
+            boolean genreIdValid = isDigit(genreId);
             boolean leftCountValid = isDigit(leftCount);
             boolean pageCountBol = isDigit(pageCount);
             boolean authorIdBol = isDigit(authorId);
             boolean idBool = isDigit(id);
-            if (!idBool) {
+            if (!genreIdValid) {
+                resp.getWriter().write("Please enter valid field for Genre id");
+            } else if (!idBool) {
                 resp.getWriter().write("Please enter valid field for Book id");
             } else if (!total) {
                 resp.getWriter().write("Please enter valid field for Total Number of Books");
@@ -59,7 +62,7 @@ public class BookControllerEdit extends HttpServlet {
                         .id(Integer.parseInt(id))
                         .name(bookName)
                         .cost(Double.parseDouble(cost))
-                        .genre(genre)
+                        .genreId(Integer.parseInt(genreId))
                         .pageCount(Integer.parseInt(pageCount))
                         .totalNumberOfBooks(Integer.parseInt(totalNumberOfBooks))
                         .leftNumberOfBooks(Integer.parseInt(leftCount))

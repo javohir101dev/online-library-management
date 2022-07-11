@@ -13,7 +13,7 @@ public class BookDto {
     private Integer id;
     private String name;
     private Double cost;
-    private String genre;
+    private Integer genreId;
     private Integer pageCount;
     private Integer totalNumberOfBooks;
     private Integer leftNumberOfBooks;

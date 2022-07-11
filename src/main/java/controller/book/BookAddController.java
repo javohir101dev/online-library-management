@@ -29,16 +29,20 @@ public class BookAddController extends HttpServlet {
         try {
             String bookName = req.getParameter("NameBook");
             String cost = req.getParameter("Cost");
-            String genre = req.getParameter("genre");
+            String genreId = req.getParameter("genreId");
             String pageCount = req.getParameter("PageCount");
             String totalNumberOfBooks = req.getParameter("TotalCount");
             String authorId = req.getParameter("AuthorId");
 
             boolean costBol = checkDouble(cost);
+            boolean genreIdValid = checkDouble(genreId);
             boolean total = isDigit(totalNumberOfBooks);
             boolean pageCountBol = isDigit(pageCount);
             boolean authorIdBol = isDigit(authorId);
-            if (!total) {
+
+            if (!genreIdValid) {
+                resp.getWriter().write("Please enter valid field for Genre Id");
+            } else if (!total) {
                 resp.getWriter().write("Please enter valid field for Number of Books");
             } else if (!pageCountBol) {
                 resp.getWriter().write("Please enter valid field for Page Count");
@@ -46,12 +50,11 @@ public class BookAddController extends HttpServlet {
                 resp.getWriter().write("Please enter valid field for Author Id");
             } else if (!costBol) {
                 resp.getWriter().write("Please enter valid field for Cost");
-                resp.setStatus(400, "BAD REQUEST");
             } else {
                 BookDto bookDto = BookDto.builder()
                         .name(bookName)
                         .cost(Double.parseDouble(cost))
-                        .genre(genre)
+                        .genreId(Integer.parseInt(genreId))
                         .pageCount(Integer.parseInt(pageCount))
                         .totalNumberOfBooks(Integer.parseInt(totalNumberOfBooks))
                         .authorId(Integer.parseInt(authorId))

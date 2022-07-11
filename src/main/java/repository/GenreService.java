@@ -45,7 +45,7 @@ public class GenreService {
             return new ResponseDto<>(false, errors.toString());
         }
         Genre genre = GenreMapper.toEntity(genreDto);
-        Genre genreById = genreRepository.getById(genre.getId());
+        Genre genreById = genreRepository.findById(genre.getId());
         if (genreById == null) {
             return new ResponseDto<>(false, String
                     .format("Genre with id: %s is not found", genreDto.getId()));
@@ -67,7 +67,7 @@ public class GenreService {
 
 
     public ResponseDto<Boolean> delete(Integer genreId) {
-        Genre genre = genreRepository.getById(genreId);
+        Genre genre = genreRepository.findById(genreId);
         if (genre == null) {
             return new ResponseDto<>(false, String
                     .format("Genre with id: %s is not found", genreId));
@@ -87,7 +87,7 @@ public class GenreService {
 
 
     public ResponseDto<GenreDto> getById(Integer id) {
-        Genre genre = genreRepository.getById(id);
+        Genre genre = genreRepository.findById(id);
         if (genre != null) {
             return new ResponseDto<>(true, AppMessage.OK, GenreMapper.toDto(genre));
         }

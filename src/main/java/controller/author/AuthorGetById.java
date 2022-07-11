@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/author/getById")
+@WebServlet("/author/findById")
 public class AuthorGetById extends HttpServlet {
     private AuthorService authorService =new AuthorService();
     @Override

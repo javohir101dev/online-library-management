@@ -68,10 +68,7 @@ public class Validation {
             errors.add(new ValidDto("name", EMPTY));
         else if (bookDto.getName() == null) {
             errors.add(new ValidDto("name", EMPTY));
-        } else if (bookDto.getGenre().trim().equals("")) {
-            errors.add(new ValidDto("genre", EMPTY));
-        } else if (bookDto.getGenre() == null)
-            errors.add(new ValidDto("genre", EMPTY));
+        }
         return errors;
     }
 
