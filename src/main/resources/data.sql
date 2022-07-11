@@ -1,6 +1,20 @@
-create database online_library_management;
+-- create database online_library_management;
 drop schema public cascade;
 create schema public;
+
+--Creating genre table in database
+create table if not exists genre
+(
+    id   serial primary key,
+    name varchar not null unique
+);
+
+-- Inserting genre info
+insert into genre(name)
+values ('Fantasy'),
+       ('Novel (Historical novel)'),
+       ('Fiction');
+
 
 -- Creating author table in database
 create table author
@@ -14,18 +28,18 @@ create table author
 -- Inserting author info
 insert into author(firstname, lastname, birth_date)
 VALUES ('Joanne ', 'Rowling ', '1965-07-31'),
-       ('Lev', 'Tolstoi', '1828-09-09');
+       ('Lev', 'Tolstoy', '1828-09-09');
 
 -- Creating users table in database
 create table users
 (
     id           serial primary key,
-    firstname    varchar,
-    lastName     varchar,
-    username     varchar,
-    phone_number varchar,
-    password     varchar,
-    role         varchar
+    firstname    varchar not null,
+    lastName     varchar not null,
+    username     varchar not null,
+    phone_number varchar not null,
+    password     varchar not null,
+    role         varchar not null
 );
 
 -- Inserting user info
@@ -38,25 +52,28 @@ VALUES ('Javohir', 'Uralov', 'admin', '+998950801467', '123', 'ADMIN'),
 create table book
 (
     id                    serial primary key,
-    name                  varchar,
-    cost                  decimal,
-    genre                 varchar,
-    page_count            integer,
-    total_number_of_books integer,
-    left_number_of_books  integer,
-    author_id             integer
+    name                  varchar not null,
+    cost                  decimal not null,
+    genre_id              integer not null,
+    page_count            integer not null,
+    total_number_of_books integer not null,
+    left_number_of_books  integer not null,
+    author_id             integer not null
 );
 -- Constrains
 alter table book
     add constraint fk_book_author_id foreign key (author_id) REFERENCES author (id);
 
+alter table book
+    add constraint fk_book_genre_id foreign key (genre_id) references genre(id);
+
 -- Inserting info
-insert into book(name, cost, genre, page_count, total_number_of_books, left_number_of_books, author_id)
-VALUES ('Harry Potter and the Philosopher''s Stone', 23, 'Fantasy', 223, 5, 5, 1),
-       ('Harry Potter and the Chamber of Secrets''s Stone', 27, 'Fantasy', 251, 5, 5, 1),
-       ('Harry Potter and the Prisoner of Azkaban''s Stone', 32, 'Fantasy', 317, 5, 5, 1),
-       ('Harry Potter and the Goblet of Fire', 43, 'fantasy', 636, 5, 5, 1),
-       ('War and Peace', 21.00, 'Novel (Historical novel)', 1225, 5, 5, 2);
+insert into book(name, cost, genre_id, page_count, total_number_of_books, left_number_of_books, author_id)
+VALUES ('Harry Potter and the Philosopher''s Stone', 23, 1, 223, 5, 5, 1),
+       ('Harry Potter and the Chamber of Secrets''s Stone', 27, 1, 251, 5, 5, 1),
+       ('Harry Potter and the Prisoner of Azkaban''s Stone', 32, 1, 317, 5, 5, 1),
+       ('Harry Potter and the Goblet of Fire', 43, 1, 636, 5, 5, 1),
+       ('War and Peace', 21.00, 2, 1225, 5, 5, 2);
 
 
 -- Creating book_user table in database
@@ -65,10 +82,10 @@ create table book_user
     id                 serial primary key,
     takenDate          timestamp        default now(),
     returnedDate       timestamp,
-    bookId             integer,
-    takenNumberOfBooks integer,
-    userId             integer,
-    isReturned         boolean not null default false
+    bookId             integer not null ,
+    takenNumberOfBooks integer not null ,
+    userId             integer not null ,
+    isReturned         boolean default false
 );
 
 alter table book_user

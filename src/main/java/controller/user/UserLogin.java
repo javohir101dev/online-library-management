@@ -1,7 +1,8 @@
 package controller.user;
 
+import helper.messages.AppMessage;
+import security.Security;
 import entity.User;
-import entity.enums.Roles;
 import model.LoginUserDto;
 import model.ResponseDto;
 import model.UsersBook;
@@ -11,14 +12,13 @@ import service.UserService;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
 import static entity.enums.Roles.ADMIN;
 import static entity.enums.Roles.USER;
+import static helper.messages.AppMessage.ERROR;
 
 @WebServlet("/user/login")
 public class UserLogin extends HttpServlet {
@@ -33,6 +33,7 @@ public class UserLogin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         try {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
@@ -41,19 +42,23 @@ public class UserLogin extends HttpServlet {
             if (!responseDto.isSuccess()) {
                 resp.getWriter().write(responseDto.getMessage());
             } else {
+
+//               Adding security with cookie and session
+                Security.addCookieAndSession(req, resp, username);
+
                 User user = (User) responseDto.getData();
                 req.setAttribute("user", user);
                 List<UsersBook> bookList = bookRepository.usersBooksByUserId(user.getId());
-                    req.setAttribute("books", bookList);
+                req.setAttribute("books", bookList);
                 if (user.getRole().equals(USER.name())) {
-                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("cabinet.jsp");
+                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/user/cabinet");
                     requestDispatcher.forward(req, resp);
                 } else if (user.getRole().equals(ADMIN.name())) {
                     req.setAttribute("user", user);
                     RequestDispatcher requestDispatcher = req.getRequestDispatcher("cabinetAdmin.jsp");
                     requestDispatcher.forward(req, resp);
                 } else {
-                    resp.getWriter().write("Something is wrong");
+                    resp.getWriter().write(ERROR);
                 }
             }
         } catch (Exception e) {

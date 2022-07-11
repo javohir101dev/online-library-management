@@ -177,9 +177,10 @@ public class BookRepository {
      * @return List<UsersBook>
      */
     public List<UsersBook> usersBooksByUserId(Integer userId) {
-        String GET_USERS_BOOKS_BY_USER_ID = "select b.id,b.name, b.genre, b.page_count, b.cost, a.firstname || ' ' || a.lastname as author " +
+        String GET_USERS_BOOKS_BY_USER_ID = "select b.id,  b.name, g.name as genre, b.page_count, b.cost, a.firstname || ' ' || a.lastname as author " +
                 " from book b " +
-                "         inner join author a on a.id = b.author_id " +
+                " inner join author a on a.id = b.author_id " +
+                "  inner join genre g on g.id = b.genre_id " +
                 " inner join book_user bu on bu.bookid = b.id " +
                 " inner join users u on u.id = bu.userId " +
                 " where u.id = " + userId +

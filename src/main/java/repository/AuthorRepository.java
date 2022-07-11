@@ -93,7 +93,7 @@ public class AuthorRepository {
      *
      * @param authorId
      * @param author
-     * @return null if author is not found with given is otherwise updated us
+     * @return null if author is not found with given is otherwise updates
      */
     public Author updateAuthorById(Integer authorId, Author author) {
         author.setId(null);

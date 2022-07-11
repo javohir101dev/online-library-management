@@ -2,10 +2,7 @@ package helper;
 
 import entity.User;
 import helper.messages.AppMessage;
-import model.AuthorDto;
-import model.BookDto;
-import model.UserUpdateDto;
-import model.ValidDto;
+import model.*;
 import repository.AuthorRepository;
 
 import java.util.ArrayList;
@@ -113,5 +110,12 @@ public class Validation {
         return errors;
     }
 
+    public static List<ValidDto> checkGenre(GenreDto genreDto) {
+        List<ValidDto> errors = new ArrayList<>();
+        if (!StringHelper.isValid(genreDto.getName())) {
+            errors.add(new ValidDto("name", EMPTY));
+        }
+        return errors;
+    }
 
 }
