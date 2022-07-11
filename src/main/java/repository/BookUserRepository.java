@@ -10,18 +10,6 @@ import java.util.List;
 
 public class BookUserRepository {
 
-    public static void main(String[] args) {
-        BookUserRepository repository = new BookUserRepository();
-//        for (BookUser allBookUser : repository.findAllBookUsers()) {
-//            System.out.println(allBookUser);
-//        }
-        BookUser bookUser = new BookUser(new java.util.Date(), null, 4, 2, 5, false);
-
-        System.out.println(repository.usersBookByBookId(1
-        ));
-
-    }
-
     //    CREATE
     public BookUser addBookUser(BookUser bookUser) {
         String INSERT_BOOK_USERS = "insert into book_user(takenDate, returnedDate, bookId, takenNumberOfBooks, userId, isReturned)" +

@@ -1,9 +1,9 @@
-1. Book author id ni o'rniga namesini olib kelish
 2. Rasm saqlash
 3. Security qo'shish
+
 4. Genreni alohida tablega chiqarish
-5. Add admin as a admin
+
+add book to admin forbid
 6. Add book logic
-7. delete book by user_book
-8. Users account
-9. User CRUD
+
+9. User as admin

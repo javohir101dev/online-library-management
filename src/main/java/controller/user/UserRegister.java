@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import static entity.enums.Roles.USER;
 
@@ -19,6 +20,7 @@ public class UserRegister extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        PrintWriter writer = resp.getWriter();
         try {
             String firstname = req.getParameter("firstname");
             String lastName = req.getParameter("lastName");
@@ -30,9 +32,11 @@ public class UserRegister extends HttpServlet {
             ResponseDto responseDto = userService.registerUser(user);
             if (responseDto.isSuccess()) {
                 resp.sendRedirect("/user/login");
+            } else {
+                writer.write(responseDto.getMessage());
             }
         } catch (Exception e) {
-            resp.getWriter().write("Please enter valid fields");
+            writer.write("Please enter valid fields");
         }
     }
 }
