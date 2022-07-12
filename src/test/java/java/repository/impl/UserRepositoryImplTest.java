@@ -6,7 +6,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import repository.UserRepository;
-import repository.UserRepositoryImpl;
 import repository.impl.UserRepositoryImpl;
 
 import java.util.List;

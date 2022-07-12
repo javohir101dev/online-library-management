@@ -7,9 +7,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import repository.BookRepository;
-import repository.impl.AuthorRepositoryImplTest;
 import repository.impl.BookRepositoryImpl;
-import repository.impl.GenreRepositoryImplTest;
 
 import java.util.Optional;
 

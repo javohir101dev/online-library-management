@@ -33,10 +33,10 @@
                     Book
                 </h5>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book/add">Add
-                        Book</a></li>
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book/getAll">Get
                         all Books</a></li>
+                    <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book/add">Add
+                        Book</a></li>
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book/edit">Edit
                         Book</a></li>
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book/delete">Delete
@@ -70,11 +70,11 @@
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/genre-getAll">Get
                         Genres</a></li>
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/genre-add">Add
-                        Genres</a></li>
+                        Genre</a></li>
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/genre-update">Edit
-                        Genres</a></li>
+                        Genre</a></li>
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/genre-delete">Delete
-                        Genres</a></li>
+                        Genre</a></li>
                 </ul>
             </div>
         </li>
@@ -86,7 +86,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book-user/add">Add
                         Book to User</a></li>
-                    <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book-user/take">Take
+                    <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book-user/take">Receive
                         Book from User</a></li>
                 </ul>
             </div>
