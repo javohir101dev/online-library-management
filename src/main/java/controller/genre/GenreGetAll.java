@@ -2,7 +2,7 @@ package controller.genre;
 
 import model.GenreDto;
 import model.ResponseDto;
-import repository.GenreService;
+import service.GenreService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

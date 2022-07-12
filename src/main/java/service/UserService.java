@@ -9,12 +9,13 @@ import model.ResponseDto;
 import model.UserUpdateDto;
 import model.ValidDto;
 import repository.UserRepository;
+import repository.UserRepositoryImpl;
 
 import java.util.List;
 
 public class UserService {
 
-    UserRepository userRepository = new UserRepository();
+    UserRepository userRepository = UserRepositoryImpl.getInstance();
 
     public ResponseDto registerUser(User user) {
 
@@ -68,6 +69,5 @@ public class UserService {
         User savedUser = userRepository.updateUserById(userByOldUsername.getId(), user);
         return new ResponseDto(true, "User is edited successfully", savedUser);
     }
-
 
 }

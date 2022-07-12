@@ -1,5 +1,11 @@
 1. Rasm saqlash
 
-2. Security qo'shish
+2. Interface
+3. Singltone
+4. Security Trying 3 times
 
-3. Add book logic(genre, author)
+
+java 8 dan nimalar
+transactional
+memory
+hashmap

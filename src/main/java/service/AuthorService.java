@@ -8,6 +8,7 @@ import model.AuthorDto;
 import model.ResponseDto;
 import model.ValidDto;
 import repository.AuthorRepository;
+import repository.impl.AuthorRepositoryImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 import static helper.Validation.checkAuthorDto;
 
 public class AuthorService {
-    private AuthorRepository authorRepository = new AuthorRepository();
+    private AuthorRepository authorRepository = AuthorRepositoryImpl.getInstance();
 
     public ResponseDto<AuthorDto> addAuthor(AuthorDto authorDto) {
         List<ValidDto> errors = checkAuthorDto(authorDto);
@@ -37,7 +38,7 @@ public class AuthorService {
 
     public ResponseDto<AuthorDto> update(AuthorDto authorDto) {
         try {
-            if (authorRepository.finfById(authorDto.getId()) == null)
+            if (authorRepository.findById(authorDto.getId()) == null)
                 return new ResponseDto<>(false, String
                         .format("Author with id: %s is not found", authorDto.getId()));
             List<ValidDto> errors = Validation.checkAuthorDto(authorDto);
@@ -55,7 +56,7 @@ public class AuthorService {
     }
 
     public ResponseDto<String> delete(Integer authorId) {
-        if (authorRepository.finfById(authorId) == null) {
+        if (authorRepository.findById(authorId) == null) {
             return new ResponseDto<>(false, String
                     .format("Author with this id: %s is not found",
                             authorId));
@@ -85,7 +86,7 @@ public class AuthorService {
     }
 
     public ResponseDto<AuthorDto> getById(Integer id) {
-        Author author = authorRepository.finfById(id);
+        Author author = authorRepository.findById(id);
         return author == null ? new ResponseDto<>(false, AppMessage.ID_IS_NOT_FOUND) :
                 new ResponseDto<>(true, AppMessage.OK, AuthorMapper.toDto(author));
     }

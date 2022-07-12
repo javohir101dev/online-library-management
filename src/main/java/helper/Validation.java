@@ -3,7 +3,6 @@ package helper;
 import entity.User;
 import helper.messages.AppMessage;
 import model.*;
-import repository.AuthorRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,6 @@ import static helper.IntegerHelper.isDigit;
 import static helper.messages.AppMessage.*;
 
 public class Validation {
-    private AuthorRepository authorRepository = new AuthorRepository();
 
     public static List<ValidDto> checkAllIntegers(BookDto bookDto) {
         List<ValidDto> errors = new ArrayList<>();

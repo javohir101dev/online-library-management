@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class Security {
-
+// singltone
     public static boolean hasPermission(HttpServletRequest req) {
         String username = null;
         Cookie[] cookies = req.getCookies();

@@ -5,17 +5,18 @@ import entity.BookUser;
 import entity.User;
 import model.BookUserDto;
 import model.ResponseDto;
-import repository.BookRepository;
-import repository.BookUserRepository;
-import repository.UserRepository;
+import repository.*;
+import repository.impl.AuthorRepositoryImpl;
+import repository.impl.BookRepositoryImpl;
+import repository.impl.BookUserRepositoryImpl;
 
 import java.util.Date;
 
 public class BookUserService {
 
-    BookUserRepository bookUserRepository = new BookUserRepository();
-    BookRepository bookRepository = new BookRepository();
-    UserRepository userRepository = new UserRepository();
+    BookUserRepository bookUserRepository = BookUserRepositoryImpl.getInstance();
+    BookRepository bookRepository = BookRepositoryImpl.getInstance();
+    UserRepository userRepository = UserRepositoryImpl.getInstance();
 
     public ResponseDto addBookToUser(BookUserDto bookUserDto) {
         User userByUsername = userRepository.findUserByUsername(bookUserDto.getUsername());

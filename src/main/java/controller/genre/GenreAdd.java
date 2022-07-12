@@ -2,11 +2,10 @@ package controller.genre;
 
 import model.GenreDto;
 import model.ResponseDto;
-import repository.GenreService;
+import service.GenreService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

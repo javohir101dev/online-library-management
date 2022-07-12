@@ -1,12 +1,12 @@
 package controller.user;
 
-import helper.messages.AppMessage;
+import repository.BookRepository;
 import security.Security;
 import entity.User;
 import model.LoginUserDto;
 import model.ResponseDto;
 import model.UsersBook;
-import repository.BookRepository;
+import repository.impl.BookRepositoryImpl;
 import service.UserService;
 
 import javax.servlet.RequestDispatcher;
@@ -24,7 +24,7 @@ import static helper.messages.AppMessage.ERROR;
 public class UserLogin extends HttpServlet {
 
     private UserService userService = new UserService();
-    private BookRepository bookRepository = new BookRepository();
+    private BookRepository bookRepository = BookRepositoryImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,7 +33,6 @@ public class UserLogin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         try {
             String username = req.getParameter("username");
             String password = req.getParameter("password");

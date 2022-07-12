@@ -1,4 +1,4 @@
-package repository;
+package service;
 
 import entity.Genre;
 import helper.Validation;
@@ -7,6 +7,8 @@ import mapper.GenreMapper;
 import model.GenreDto;
 import model.ResponseDto;
 import model.ValidDto;
+import repository.GenreRepository;
+import repository.impl.GenreRepositoryImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +16,7 @@ import java.util.stream.Collectors;
 import static helper.messages.AppMessage.ERROR;
 
 public class GenreService {
-    private GenreRepository genreRepository = new GenreRepository();
+    private GenreRepository genreRepository = GenreRepositoryImpl.getInstance();
 
     public ResponseDto<GenreDto> addGenre(GenreDto genreDto) {
         try {
