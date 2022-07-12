@@ -10,6 +10,14 @@
 </head>
 <body>
 
+<p>
+<p>
+<p>
+
+<div class="text-center">
+    <h2> Welcome to our online Library </h2>
+</div>
+
 <style>
     .main {
         width: 100%;
@@ -24,14 +32,14 @@
 <section class="main">
     <form class="d-block" action="/user/login" method="post">
         <!-- Email input -->
-        <div class="form-outline mb-4">
-            <label class="form-label" for="form2Example1">Login</label>
+        <div class="form-outline mb-3">
+            <label class="form-label">Login</label>
             <input name="username" placeholder="Enter username" class="form-control"/>
         </div>
 
         <!-- Password input -->
         <div class="form-outline mb-4">
-            <label class="form-label" for="form2Example2">Password</label>
+            <label class="form-label">Password</label>
             <input type="password" name="password" placeholder="Enter password" class="form-control"/>
         </div>
 
@@ -42,6 +50,13 @@
         <div class="text-center">
             <p>Registration is here 👉 <a href="/user/register.jsp">Register</a></p>
         </div>
+
+        <!-- List of our Books -->
+        <div class="text-center">
+            <p></p>
+            <p>List of our Books 👉 <a href="/book/getAll">List of our Books</a></p>
+        </div>
+
     </form>
 </section>
 
