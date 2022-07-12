@@ -22,6 +22,5 @@ public class CabinetAdmin extends HttpServlet {
         } else {
             resp.sendRedirect("/user/login");
         }
-
     }
 }

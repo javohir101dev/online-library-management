@@ -12,10 +12,11 @@ import java.util.List;
 public class BookRepositoryImpl implements BookRepository {
 
     private static BookRepository book;
-    private BookRepositoryImpl(){
+
+    private BookRepositoryImpl() {
     }
 
-    public static BookRepository getInstance(){
+    public static BookRepository getInstance() {
         if (book == null)
             book = new BookRepositoryImpl();
         return book;
@@ -116,7 +117,7 @@ public class BookRepositoryImpl implements BookRepository {
 
     public Book updateBookById(Integer bookId, Book book) {
         String UPDATE_BOOK_BY_ID = "update book set name = ?, " +
-                "cost = ?, genre_id = ?, page_count = ?, total_number_of_books = ?, left_number_of_books = ?, author_id = ? \n" +
+                "cost = ?, genre_id = ?, page_count = ?, total_number_of_books = ?, left_number_of_books = ?, author_id = ?  " +
                 "where id = ? ; ";
         try (Connection connection = new DBConnection().getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement(UPDATE_BOOK_BY_ID, Statement.RETURN_GENERATED_KEYS)
@@ -134,12 +135,12 @@ public class BookRepositoryImpl implements BookRepository {
             if (generatedKeys.next()) {
                 Integer id = generatedKeys.getInt(1);
                 book.setId(id);
+                return book;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new RuntimeException(ex);
         }
-        return book.getId() == null ? null : book;
+        return null;
     }
 
     public boolean deleteBookById(Integer bookId) {
