@@ -1,7 +1,8 @@
-package repository;
+package repository.impl;
 
 import entity.User;
 import helper.DBConnection;
+import repository.UserRepository;
 
 import java.sql.*;
 import java.util.ArrayList;

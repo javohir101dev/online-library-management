@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Genre {
     private  Integer id;
-
     private  String name;
+
+    public Genre(String name) {
+        this.name = name;
+    }
 }

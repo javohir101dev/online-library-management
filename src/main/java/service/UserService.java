@@ -9,7 +9,7 @@ import model.ResponseDto;
 import model.UserUpdateDto;
 import model.ValidDto;
 import repository.UserRepository;
-import repository.UserRepositoryImpl;
+import repository.impl.UserRepositoryImpl;
 
 import java.util.List;
 
