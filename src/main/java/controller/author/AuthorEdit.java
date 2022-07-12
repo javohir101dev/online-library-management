@@ -4,8 +4,10 @@ import helper.DateHelper;
 import helper.IntegerHelper;
 import model.AuthorDto;
 import model.ResponseDto;
+import security.Security;
 import service.AuthorService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +25,10 @@ public class AuthorEdit extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/author/editAuthor.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/author/editAuthor.jsp");
+        requestDispatcher.forward(req, resp);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -51,7 +55,7 @@ public class AuthorEdit extends HttpServlet {
                         .birthDate(Date.valueOf(birthDate))
                         .build();
                 ResponseDto<AuthorDto> responseDto = authorService.update(authorDto);
-                    writer.write(responseDto.getMessage());
+                writer.write(responseDto.getMessage());
             }
         } catch (Exception e) {
             e.printStackTrace();

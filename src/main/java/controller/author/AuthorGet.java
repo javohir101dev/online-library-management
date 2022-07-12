@@ -2,6 +2,7 @@ package controller.author;
 
 import model.AuthorDto;
 import model.ResponseDto;
+import security.Security;
 import service.AuthorService;
 
 import javax.servlet.RequestDispatcher;
@@ -20,11 +21,11 @@ public class AuthorGet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ResponseDto<List<AuthorDto>> responseDto = authorService.getAll();
-        if (responseDto.isSuccess()){
-            req.setAttribute("authors",responseDto.getData());
+        if (responseDto.isSuccess()) {
+            req.setAttribute("authors", responseDto.getData());
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/author/getAllAuthors.jsp");
-            requestDispatcher.forward(req,resp);
-        }else {
+            requestDispatcher.forward(req, resp);
+        } else {
             resp.getWriter().write(responseDto.getMessage());
         }
     }

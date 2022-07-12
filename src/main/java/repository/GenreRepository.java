@@ -60,8 +60,8 @@ public class GenreRepository {
         return false;
     }
 
-    public Genre findById(Integer id) {
-        String GET_BY_ID_QUERY = "SELECT * FROM genre WHERE id= " + id;
+    public Genre findById(Integer genreId) {
+        String GET_BY_ID_QUERY = "SELECT * FROM genre WHERE id= " + genreId;
         try (Connection connection = new DBConnection().getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(GET_BY_ID_QUERY);

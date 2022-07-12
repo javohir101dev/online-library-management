@@ -68,8 +68,6 @@
 </form>
 
 
-
-
 <h3>User</h3>
 <form action="/user/addAdmin" method="get">
     <button type="submit">Add Admin</button>

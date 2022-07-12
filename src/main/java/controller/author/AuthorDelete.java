@@ -1,10 +1,11 @@
 package controller.author;
 
 import helper.IntegerHelper;
-import helper.messages.AppMessage;
 import model.ResponseDto;
+import security.Security;
 import service.AuthorService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +22,9 @@ public class AuthorDelete extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/author/deleteAuthor.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/author/deleteAuthor.jsp");
+        requestDispatcher.forward(req, resp);
+
     }
 
     @Override
@@ -32,7 +35,7 @@ public class AuthorDelete extends HttpServlet {
             boolean idBool = IntegerHelper.isDigit(id);
             if (!idBool) {
                 writer.write("Please enter valid field for authorId");
-            }else {
+            } else {
                 ResponseDto<String> responseDto = authorService.delete(Integer.parseInt(id));
                 writer.write(responseDto.getMessage());
             }

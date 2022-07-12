@@ -55,7 +55,7 @@ public class UserLogin extends HttpServlet {
                     requestDispatcher.forward(req, resp);
                 } else if (user.getRole().equals(ADMIN.name())) {
                     req.setAttribute("user", user);
-                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("cabinetAdmin.jsp");
+                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/user/cabinetAdmin");
                     requestDispatcher.forward(req, resp);
                 } else {
                     resp.getWriter().write(ERROR);

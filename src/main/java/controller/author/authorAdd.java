@@ -3,8 +3,10 @@ package controller.author;
 import helper.DateHelper;
 import model.AuthorDto;
 import model.ResponseDto;
+import security.Security;
 import service.AuthorService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +23,8 @@ public class authorAdd extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/author/addAuthor.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/author/addAuthor.jsp");
+        requestDispatcher.forward(req, resp);
     }
 
     @Override
@@ -39,9 +42,9 @@ public class authorAdd extends HttpServlet {
                     .birthDate(Date.valueOf(birthdate))
                     .build();
             ResponseDto<AuthorDto> responseDto = authorService.addAuthor(authorDto);
-            if (responseDto.isSuccess()){
+            if (responseDto.isSuccess()) {
                 resp.getWriter().write(responseDto.getMessage());
-            }else {
+            } else {
                 resp.getWriter().write(responseDto.getError().toString());
             }
         } catch (Exception e) {

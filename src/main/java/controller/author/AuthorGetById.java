@@ -1,8 +1,10 @@
 package controller.author;
 
 import helper.IntegerHelper;
+import security.Security;
 import service.AuthorService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +14,16 @@ import java.io.IOException;
 
 @WebServlet("/author/findById")
 public class AuthorGetById extends HttpServlet {
-    private AuthorService authorService =new AuthorService();
+    private AuthorService authorService = new AuthorService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("author/getAllAuthors.jsp");
+        if (Security.hasPermission(req)) {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("author/getAllAuthors.jsp");
+                    requestDispatcher.forward(req, resp);
+        } else {
+            resp.sendRedirect("/user/login");
+        }
     }
 
     @Override
@@ -23,11 +31,11 @@ public class AuthorGetById extends HttpServlet {
         try {
             String id = req.getParameter("IdAuthor");
             boolean idBool = IntegerHelper.isDigit(id);
-            if(!idBool)
+            if (!idBool)
                 resp.getWriter().write("Please enter valid field for id");
             authorService.delete(Integer.parseInt(id));
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             resp.getWriter().write("Error");
         }

@@ -26,7 +26,7 @@ public class Security {
 
     public static void addCookieAndSession(HttpServletRequest req, HttpServletResponse resp, String username){
         Cookie cookie = new Cookie("authApp", username);
-        cookie.setMaxAge(60 * 5);
+        cookie.setMaxAge(60 * 5);  // 5 min
         resp.addCookie(cookie);
         HttpSession session = req.getSession();
         session.setAttribute("authApp", username);
@@ -34,10 +34,10 @@ public class Security {
 
     public static void logout(HttpServletRequest req, HttpServletResponse resp){
         Cookie cookie = new Cookie("authApp", "");
-        cookie.setMaxAge(0);
+        cookie.setMaxAge(0);  // invalidate cookie
         resp.addCookie(cookie);
         HttpSession session = req.getSession();
-        session.invalidate();
+        session.invalidate(); // invalidate session
     }
 
 }

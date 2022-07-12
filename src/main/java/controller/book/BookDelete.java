@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import static helper.messages.AppMessage.ERROR;
 
@@ -24,16 +25,17 @@ public class BookDelete extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        PrintWriter writer = resp.getWriter();
         try {
             String id = req.getParameter("IdBook");
             boolean idBool = IntegerHelper.isDigit(id);
             if(!idBool)
-                resp.getWriter().write("Please enter valid field for Book Id");
+                writer.write("Please enter valid field for Book Id");
             ResponseDto<?> responseDto = bookService.delete(Integer.parseInt(id));
-            resp.getWriter().write(responseDto.getMessage());
+            writer.write(responseDto.getMessage());
         }catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write(ERROR);
+            writer.write(ERROR);
         }
     }
 }

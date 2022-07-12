@@ -68,7 +68,7 @@ public class BookService {
                 return new ResponseDto<>(false, String.
                         format("Author with given id: %s is not found", bookDto.getAuthorId()));
             }
-            if (genreRepository.findById(bookDto.getAuthorId()) == null) {
+            if (genreRepository.findById(bookDto.getGenreId()) == null) {
                 return new ResponseDto<>(false, String.
                         format("Genre with given id: %s is not found", bookDto.getAuthorId()));
             }
@@ -93,7 +93,8 @@ public class BookService {
     public ResponseDto<?> delete(Integer bookId) {
         Book bookById = bookRepository.findById(bookId);
         if (bookById == null) {
-            return new ResponseDto<>(false, AppMessage.ID_IS_NOT_FOUND);
+            return new ResponseDto<>(false, String
+                    .format("Book with id: %s is not found", bookId));
         }
         String username = bookUserRepository.usersBookByBookId(bookId);
         if (username != null) {

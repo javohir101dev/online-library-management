@@ -10,15 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/cabinet")
-public class Cabinet extends HttpServlet {
-
+@WebServlet("/user/cabinetAdmin")
+public class CabinetAdmin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         boolean hasPermission = Security.hasPermission(req);
         if (hasPermission) {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/user/cabinet.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/user/cabinetAdmin.jsp");
             requestDispatcher.forward(req, resp);
         } else {
             resp.sendRedirect("/user/login");
