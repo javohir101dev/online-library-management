@@ -15,7 +15,6 @@ values ('Fantasy'),
        ('Novel (Historical novel)'),
        ('Fiction');
 
-
 -- Creating author table in database
 create table author
 (
