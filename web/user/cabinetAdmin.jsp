@@ -24,7 +24,7 @@
 </style>
 
 <section class="main">
-    <h1>Welcome to your Admin panel ${user.firstname} ${user.lastName} </h1>
+    <h1>Welcome to your Admin panel ${user.firstname} ${user.lastName} </h1><br>
 
     <ul class="d-flex list-inline">
         <li class="m-2">

@@ -53,6 +53,7 @@ public class UserLogin extends HttpServlet {
                 req.setAttribute("books", bookList);
                 if (user.getRole().equals(USER.name())) {
                     RequestDispatcher requestDispatcher = req.getRequestDispatcher("/user/cabinet");
+//                    resp.sendRedirect("/user/cabinet");
                     requestDispatcher.forward(req, resp);
                 } else if (user.getRole().equals(ADMIN.name())) {
                     req.setAttribute("user", user);

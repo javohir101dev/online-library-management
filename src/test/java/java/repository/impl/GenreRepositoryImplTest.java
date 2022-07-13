@@ -3,7 +3,6 @@ package java.repository.impl;
 import entity.Genre;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import repository.GenreRepository;
 import repository.impl.GenreRepositoryImpl;

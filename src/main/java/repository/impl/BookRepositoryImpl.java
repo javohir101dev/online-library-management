@@ -277,4 +277,50 @@ public class BookRepositoryImpl implements BookRepository {
         }
         return bookList;
     }
+
+    public List<BookShow> findAllBooksShowSearch(String search) {
+        List<BookShow> bookList = new ArrayList<>();
+        String GET_ALL_BOOKS_SHOW_SEARCH = "select b.id, " +
+                "       b.name, " +
+                "       b.cost, " +
+                "       g.name                           as genre, " +
+                "       b.page_count, " +
+                "       b.total_number_of_books, " +
+                "       b.left_number_of_books, " +
+                "       a.firstname || ' ' || a.lastname as author " +
+                " from book b " +
+                "         inner join author a on b.author_id = a.id " +
+                "         inner join genre g on g.id = b.genre_id " +
+                " where upper(b.name) like upper('%' || '" + search + "' || '%')" +
+                "order by b.id  ";
+
+        try (Connection connection = new DBConnection().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(GET_ALL_BOOKS_SHOW_SEARCH)
+        ) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                Double cost = resultSet.getDouble("cost");
+                String genre = resultSet.getString("genre");
+                Integer pageCount = resultSet.getInt("page_count");
+                Integer totalNumberOfBooks = resultSet.getInt("total_number_of_books");
+                Integer leftNumberOfBooks = resultSet.getInt("left_number_of_books");
+                String author = resultSet.getString("author");
+                BookShow book = new BookShow(id,
+                        name,
+                        cost,
+                        genre,
+                        pageCount,
+                        totalNumberOfBooks,
+                        leftNumberOfBooks,
+                        author);
+                bookList.add(book);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return bookList;
+    }
 }

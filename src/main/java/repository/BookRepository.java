@@ -55,4 +55,11 @@ public interface BookRepository {
      */
     List<BookShow> findAllBooksShow();
 
+    /**
+     * Searches from books due to name by ignore case
+     * @param search String
+     * @return List of BookShows
+     */
+    public List<BookShow> findAllBooksShowSearch(String search);
+
 }

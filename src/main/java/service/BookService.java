@@ -1,6 +1,7 @@
 package service;
 
 import entity.Book;
+import helper.StringHelper;
 import helper.Validation;
 import helper.messages.AppMessage;
 import mapper.BookMapper;
@@ -130,6 +131,14 @@ public class BookService {
 
     public ResponseDto<List<BookShow>> getAllShow() {
         List<BookShow> allBooksShow = bookRepositoryImpl.findAllBooksShow();
+        return new ResponseDto<>(true, AppMessage.OK, allBooksShow);
+    }
+
+    public ResponseDto<List<BookShow>> getAllShowSearch(String search) {
+        if (!StringHelper.isValid(search)){
+            return new ResponseDto<>(false, "Word for searching cannot be blank(empty)");
+        }
+        List<BookShow> allBooksShow = bookRepositoryImpl.findAllBooksShowSearch(search);
         return new ResponseDto<>(true, AppMessage.OK, allBooksShow);
     }
 
