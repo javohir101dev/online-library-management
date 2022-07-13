@@ -84,6 +84,8 @@
                     Book User
                 </h5>
                 <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book-user/get">All
+                        Given books</a></li>
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book-user/add">Add
                         Book to User</a></li>
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book-user/take">Receive
@@ -97,7 +99,8 @@
                     User
                 </h5>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/user/addAdmin">Add Admin</a></li>
+                    <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/user/addAdmin">Add
+                        Admin</a></li>
                 </ul>
             </div>
         </li>

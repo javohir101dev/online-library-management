@@ -1,6 +1,7 @@
 package repository;
 
 import entity.BookUser;
+import model.BookUserAll;
 
 import java.util.List;
 
@@ -34,4 +35,11 @@ public interface BookUserRepository {
 
     //    DELETE
     public boolean deleteBookUserById(Integer bookUserId);
+
+    /**
+     * Returns all given books list with username and book id
+     * @return BookUserAll or empty list
+     */
+    public List<BookUserAll> getAllGivenBooks();
+
 }

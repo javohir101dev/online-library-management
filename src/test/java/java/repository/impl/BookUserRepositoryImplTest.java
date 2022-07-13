@@ -18,23 +18,24 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookUserRepositoryImplTest {
-private static final BookUserRepository bookUserRepository= BookUserRepositoryImpl.getInstance();
-static BookRepositoryImplTest bookRepositoryImplTest=new BookRepositoryImplTest();
-static UserRepositoryImplTest userRepositoryImplTest=new UserRepositoryImplTest();
-static Integer bookId;
-static Integer userId;
-static BookUser bookUser=new BookUser(Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusDays(7)),bookId,5,userId,false);
+    private static final BookUserRepository bookUserRepository = BookUserRepositoryImpl.getInstance();
+    static BookRepositoryImplTest bookRepositoryImplTest = new BookRepositoryImplTest();
+    static UserRepositoryImplTest userRepositoryImplTest = new UserRepositoryImplTest();
+    static Integer bookId;
+    static Integer userId;
+    static BookUser bookUser = new BookUser(Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plusDays(7)), bookId, 5, userId, false);
+
     @BeforeAll
-   static void addBookUser() {
+    static void addBookUser() {
         BookRepositoryImplTest.addBook();
         Book byId = bookRepositoryImplTest.findById();
         assertNotNull(byId.getId());
-        bookId=byId.getId();
+        bookId = byId.getId();
         bookUser.setBookId(bookId);
         UserRepositoryImplTest.addUser();
         User userById = userRepositoryImplTest.getUserById();
         assertNotNull(userById);
-        userId=userById.getId();
+        userId = userById.getId();
         bookUser.setUserId(userId);
 
         BookUser addBookUser = bookUserRepository.addBookUser(bookUser);
@@ -44,15 +45,18 @@ static BookUser bookUser=new BookUser(Date.valueOf(LocalDate.now()),Date.valueOf
 
     @Test
     void findAllBookUsers() {
-        Optional<BookUser> first = bookUserRepository.findAllBookUsers().stream().filter(bookUser1 -> bookUser1.getId().equals(bookUser.getId())).findFirst();
+        Optional<BookUser> first = bookUserRepository.findAllBookUsers()
+                .stream().
+                filter(bookUser1 -> bookUser1.getId().equals(bookUser.getId()))
+                .findFirst();
         assertTrue(first.isPresent());
     }
 
     @Test
     void countUsersBookByUseridAndBookId() {
 
-            int count = bookUserRepository.countUsersBookByUseridAndBookId(userId, bookId);
-       assertNotEquals(count,-1);
+        int count = bookUserRepository.countUsersBookByUseridAndBookId(userId, bookId);
+        assertNotEquals(count, -1);
 
     }
 
@@ -73,11 +77,11 @@ static BookUser bookUser=new BookUser(Date.valueOf(LocalDate.now()),Date.valueOf
         bookUser.setReturned(true);
         bookUserRepository.updateBookUser(bookUser);
         BookUser byUserIdAndBookId = bookUserRepository.findByUserIdAndBookId(userId, bookId);
-        assertEquals(bookUser.isReturned(),byUserIdAndBookId.isReturned());
+        assertEquals(bookUser.isReturned(), byUserIdAndBookId.isReturned());
     }
 
     @AfterAll
-  static   void deleteBookUserById() {
+    static void deleteBookUserById() {
         boolean deleteBookUserById = bookUserRepository.deleteBookUserById(bookUser.getId());
         UserRepositoryImplTest.deleteUserById();
         BookRepositoryImplTest.deleteBookById();

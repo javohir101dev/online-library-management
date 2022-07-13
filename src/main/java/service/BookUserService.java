@@ -3,6 +3,8 @@ package service;
 import entity.Book;
 import entity.BookUser;
 import entity.User;
+import helper.messages.AppMessage;
+import model.BookUserAll;
 import model.BookUserDto;
 import model.ResponseDto;
 import repository.*;
@@ -11,6 +13,7 @@ import repository.impl.BookUserRepositoryImpl;
 import repository.impl.UserRepositoryImpl;
 
 import java.util.Date;
+import java.util.List;
 
 public class BookUserService {
 
@@ -85,7 +88,7 @@ public class BookUserService {
                 .countUsersBookByUseridAndBookId(userId, bookId);
         if (usersAllBooksCount == 0) {
             return new ResponseDto(false,
-                    "This user returned all books or did not taken any book",
+                    String.format("This user returned all books with id: %s (or did not taken any book)", bookId),
                     null);
         }
 
@@ -113,5 +116,10 @@ public class BookUserService {
         }
         return new ResponseDto(true, String.format("%s Books returned successfully from user with username %s",
                 numberOfBooks, userByUsername.getUsername()));
+    }
+
+    public ResponseDto allGivenBooks(){
+        List<BookUserAll> allTakenBooks = bookUserRepository.getAllGivenBooks();
+        return new ResponseDto(true, AppMessage.OK, allTakenBooks);
     }
 }

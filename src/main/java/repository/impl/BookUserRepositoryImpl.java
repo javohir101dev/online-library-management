@@ -3,6 +3,7 @@ package repository.impl;
 import entity.BookUser;
 import helper.DBConnection;
 import helper.DateHelper;
+import model.BookUserAll;
 import repository.BookUserRepository;
 
 import java.sql.*;
@@ -11,11 +12,12 @@ import java.util.List;
 
 public class BookUserRepositoryImpl implements BookUserRepository {
 
-    private static  BookUserRepository bookUserRepository;
-    private BookUserRepositoryImpl(){
+    private static BookUserRepository bookUserRepository;
+
+    private BookUserRepositoryImpl() {
     }
 
-    public static BookUserRepository getInstance(){
+    public static BookUserRepository getInstance() {
         if (bookUserRepository == null)
             bookUserRepository = new BookUserRepositoryImpl();
         return bookUserRepository;
@@ -193,6 +195,32 @@ public class BookUserRepositoryImpl implements BookUserRepository {
             throw new RuntimeException(ex);
         }
         return false;
+    }
+
+    public List<BookUserAll> getAllGivenBooks() {
+        String GET_ALL_TAKEN_NUMBERS = "select b.id, b.name, u.username, bu.takennumberofbooks " +
+                " from book_user bu " +
+                "         inner join book b on b.id = bu.bookid " +
+                "         inner join users u on bu.userid = u.id ";
+        List<BookUserAll> bookUserAllList = new ArrayList<>();
+
+        try (Connection connection = new DBConnection().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(GET_ALL_TAKEN_NUMBERS)
+        ) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String username = resultSet.getString("username");
+                int takennumberofbooks = resultSet.getInt("takennumberofbooks");
+                BookUserAll bookUserAll = new BookUserAll(id, name, username, takennumberofbooks);
+                bookUserAllList.add(bookUserAll);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return bookUserAllList;
     }
 
 }
