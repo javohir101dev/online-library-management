@@ -8,19 +8,19 @@ import java.util.List;
 public interface BookUserRepository {
 
     //    CREATE
-    public BookUser addBookUser(BookUser bookUser);
+     BookUser addBookUser(BookUser bookUser);
 
     //        READ
-    public List<BookUser> findAllBookUsers();
+     List<BookUser> findAllBookUsers();
 
-    public int countUsersBookByUseridAndBookId(Integer userId, Integer bookId);
+     int countUsersBookByUseridAndBookId(Integer userId, Integer bookId);
 
     /**
      * Returns username if user have taken book with given id otherwise null
      * @param bookId id of book
      * @return username
      */
-    public String usersBookByBookId(Integer bookId);
+     String usersBookByBookId(Integer bookId);
 
     /**
      * returns null if bookUser with given userId and bookId is not found
@@ -28,18 +28,25 @@ public interface BookUserRepository {
      * @param bookId books's id
      * @return BookUser
      */
-    public BookUser findByUserIdAndBookId(Integer userId, Integer bookId);
+     BookUser findByUserIdAndBookId(Integer userId, Integer bookId);
 
 //        UPDATE
-    public BookUser updateBookUser(BookUser bookUser);
+     BookUser updateBookUser(BookUser bookUser);
 
     //    DELETE
-    public boolean deleteBookUserById(Integer bookUserId);
+     boolean deleteBookUserById(Integer bookUserId);
 
     /**
      * Returns all given books list with username and book id
      * @return BookUserAll or empty list
      */
-    public List<BookUserAll> getAllGivenBooks();
+     List<BookUserAll> getAllGivenBooks();
+
+    /**
+     * Counts book_user by userId
+     * @param userId id of user
+     * @return thr number of book user
+     */
+     int countUsersBookByUserid(Integer userId);
 
 }

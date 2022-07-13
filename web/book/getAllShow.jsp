@@ -19,7 +19,7 @@
             <div class="form-outline flex-fill mb-0">
                 <input name="search" type="text" placeholder="Search"
                        id="form3Example1c" class="form-control"/>
-                <label class="form-label" for="form3Example1c">By name(contains)</label>
+                <label class="form-label" for="form3Example1c">By name(contains ignore case)</label>
             </div>
         </div>
 

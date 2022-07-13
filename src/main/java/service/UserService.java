@@ -4,18 +4,25 @@ package service;
 import entity.User;
 import entity.enums.Roles;
 import helper.Validation;
+import helper.messages.AppMessage;
 import model.LoginUserDto;
 import model.ResponseDto;
 import model.UserUpdateDto;
 import model.ValidDto;
+import repository.BookUserRepository;
 import repository.UserRepository;
+import repository.impl.BookUserRepositoryImpl;
 import repository.impl.UserRepositoryImpl;
 
 import java.util.List;
 
+import static helper.messages.AppMessage.ERROR;
+import static helper.messages.AppMessage.OK;
+
 public class UserService {
 
     UserRepository userRepository = UserRepositoryImpl.getInstance();
+    BookUserRepository bookUserRepository = BookUserRepositoryImpl.getInstance();
 
     public ResponseDto registerUser(User user) {
 
@@ -70,4 +77,29 @@ public class UserService {
         return new ResponseDto(true, "User is edited successfully", savedUser);
     }
 
+    public ResponseDto<List<User>> getAllUsers() {
+        List<User> allUsers = userRepository.getAllUsers();
+        return new ResponseDto<>(true, OK, allUsers);
+    }
+
+    public ResponseDto deleteUserById(String username) {
+
+        User userByUsername = userRepository.findUserByUsername(username);
+        if (userByUsername == null) {
+            return new ResponseDto(false, String.
+                    format("User with username: %s is not found", username));
+        }
+        int bookUserCount = bookUserRepository.countUsersBookByUserid(userByUsername.getId());
+        if (bookUserCount > 0){
+            return new ResponseDto(false, String.
+                    format("You first take(receive) books from user  with username: %s", username));
+        }
+
+        boolean isDeleted = userRepository.deleteUserById(userByUsername.getId());
+        if (isDeleted){
+            return new ResponseDto(true, String
+                    .format("User with username: %s is deleted successfully!", username));
+        }
+        return new ResponseDto(false, ERROR);
+    }
 }

@@ -103,6 +103,25 @@ public class BookUserRepositoryImpl implements BookUserRepository {
         return count;
     }
 
+    public int countUsersBookByUserid(Integer userId) {
+        int count = 0;
+        String COUNT_BOOKS_QUERY_BY_USERID_AND_BOOKID = "select count(*) from book_user bu " +
+                " where bu.userid  = " + userId ;
+        try (Connection connection = new DBConnection().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(COUNT_BOOKS_QUERY_BY_USERID_AND_BOOKID);
+        ) {
+            if (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex);
+        }
+        return count;
+    }
+
+
     public String usersBookByBookId(Integer bookId) {
         String username = null;
         String USERS_BOOK_BY_BOOK_ID = "select u.username from book b inner join book_user\n" +

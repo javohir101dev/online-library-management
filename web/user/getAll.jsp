@@ -7,33 +7,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <title>Authors</title>
+    <title>All Users</title>
 </head>
 <body>
 
-<h1 class="text-uppercase text-center mb-4" style="font-family: 'Times New Roman';">All Authors</h1>
+<H1 class="text-uppercase text-center mb-4" style="font-family: 'Times New Roman';">All registered Users</H1>
+
+
 <section class="d-flex justify-content-center">
-    <table class=" w-75 table table-striped ">
+
+    <table class="w-75 table table-striped ">
         <thead>
         <tr>
-            <th scope="col">id</th>
-            <th scope="col">Full Name</th>
-            <th scope="col">Birth Date</th>
+            <th scope="col">Id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Role</th>
         </tr>
         </thead>
         <tbody>
 
-        <c:forEach items="${authors}" var="author">
+        <c:forEach items="${users}" var="user">
             <tr>
-                <th scope="row">${author.id}</th>
-                <td>${author.firstname} ${author.lastName}</td>
-                <td>${author.birthDate}</td>
+                <th scope="row">${user.id}</th>
+                <td>${user.firstname}</td>
+                <td>${user.lastName}</td>
+                <td>${user.username}</td>
+                <td>${user.phoneNumber}</td>
+                <td>${user.role}</td>
             </tr>
         </c:forEach>
 
         </tbody>
     </table>
+
 </section>
 
 </body>

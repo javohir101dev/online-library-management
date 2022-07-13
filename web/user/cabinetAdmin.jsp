@@ -99,9 +99,22 @@
                     User
                 </h5>
                 <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/user/getAll">Get
+                        All Users</a></li>
+                </ul>
+                <ul class="list-group list-group-flush">
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/user/addAdmin">Add
                         Admin</a></li>
                 </ul>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/user/edit">Edit
+                        User</a></li>
+                </ul>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/user/delete">Delete
+                        User</a></li>
+                </ul>
+
             </div>
         </li>
     </ul>
