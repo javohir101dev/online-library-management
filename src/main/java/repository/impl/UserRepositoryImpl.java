@@ -32,7 +32,7 @@ public class UserRepositoryImpl implements UserRepository {
             prepareStatement.setString(1, user.getFirstname());
             prepareStatement.setString(2, user.getLastName());
             prepareStatement.setString(3, user.getUsername());
-            prepareStatement.setString(4, user.getUsername());
+            prepareStatement.setString(4, user.getPhoneNumber());
             prepareStatement.setString(5, user.getPassword());
             prepareStatement.setString(6, user.getRole());
             prepareStatement.execute();

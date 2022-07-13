@@ -17,7 +17,6 @@
     <title>Add Admin</title>
 </head>
 <body>
-<h2>Adding Admin to System</h2>
 
 <section class="vh-100" style="background-color: #eee;">
     <div class="container h-100">

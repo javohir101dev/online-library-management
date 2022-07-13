@@ -5,6 +5,7 @@ import model.ResponseDto;
 import model.UserUpdateDto;
 import service.UserService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +20,12 @@ import static entity.enums.Roles.USER;
 public class UserEdit extends HttpServlet {
 
     UserService userService = new UserService();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/user/userEdit.jsp");
+        requestDispatcher.forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

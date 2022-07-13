@@ -20,26 +20,47 @@
 </head>
 <body>
 
-<h1>Welcome your personal cabinet ${user.firstname} ${user.lastName}  </h1>
+<h1 class="text-uppercase text-center mb-4" style="font-family: 'Times New Roman';">Welcome your personal
+    cabinet ${user.firstname} ${user.lastName}  </h1>
+
+<h1 class="text-uppercase text-center mb-4" style="font-family: 'Times New Roman';">List of books</h1>
+
+<table class="table table-striped ">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Pages</th>
+        <th scope="col">Author</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <c:forEach items="${books}" var="book">
+        <tr>
+            <th scope="row">${book.id}</th>
+            <td>${book.name}</td>
+            <td>${book.cost}</td>
+            <td>${book.genre}</td>
+            <td>${book.pageCount}</td>
+            <td>${book.author}</td>
+        </tr>
+    </c:forEach>
 
 
-<h2>Your list of books</h2>
-<%--${books}--%>
-<c:forEach items="${books}" var="book">
-    Id: ${book.id} Name: ${book.name} Genre: ${book.genre} Pages: ${book.pageCount} Cost: ${book.cost} Author: ${book.author}
-    <br>
-</c:forEach>
-<p></p>
-<h3>Edit your personal account </h3>
-<body>
-<form action="/user/edit" method="post">
-    Firstname <input name="firstname" type="text" placeholder="Firstname"><br>
-    LastName <input name="lastName" type="text" placeholder="LastName"><br>
-    Old Username <input name="oldUsername" type="text" placeholder="Old Username"><br>
-    New Username <input name="newUsername" type="text" placeholder="New Username"><br>
-    Phone Number <input name="phoneNumber" type="text" placeholder="Phone Number"><br>
-    Password <input name="password" type="password" placeholder="Password"><br>
-    <button type="submit">Edit</button>
+    </tbody>
+</table>
+
+
+<h3 class="text-uppercase text-center mb-4" style="font-family: 'Times New Roman';">Edit your personal account </h3>
+<p>
+
+<form action="/user/edit" method="get">
+    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+        <button type="submit" class="btn btn-primary btn-lg">Edit Account</button>
+    </div>
 </form>
 
 
