@@ -2,6 +2,7 @@ package repository.impl;
 
 import entity.Book;
 import helper.DBConnection;
+import model.BookShow;
 import model.UsersBook;
 import repository.BookRepository;
 
@@ -51,6 +52,40 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     public List<Book> findAllBooks() {
+        List<Book> bookList = new ArrayList<>();
+        String GET_ALL_BOOKS = "select * from book order by id ";
+
+        try (Connection connection = new DBConnection().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(GET_ALL_BOOKS)
+        ) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                Double cost = resultSet.getDouble("cost");
+                Integer genreId = resultSet.getInt("genre_id");
+                Integer pageCount = resultSet.getInt("page_count");
+                Integer totalNumberOfBooks = resultSet.getInt("total_number_of_books");
+                Integer leftNumberOfBooks = resultSet.getInt("left_number_of_books");
+                Integer authorId = resultSet.getInt("author_id");
+                Book book = new Book(id,
+                        name,
+                        cost,
+                        genreId,
+                        pageCount,
+                        totalNumberOfBooks,
+                        leftNumberOfBooks,
+                        authorId);
+                bookList.add(book);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return bookList;
+    }
+
+    public List<Book> findAllBooksWithAuthor() {
         List<Book> bookList = new ArrayList<>();
         String GET_ALL_BOOKS = "select * from book order by id ";
 
@@ -194,6 +229,51 @@ public class BookRepositoryImpl implements BookRepository {
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex);
+        }
+        return bookList;
+    }
+
+
+    public List<BookShow> findAllBooksShow() {
+        List<BookShow> bookList = new ArrayList<>();
+        String GET_ALL_BOOKS_SHOW = "select b.id,\n" +
+                "       b.name,\n" +
+                "       b.cost,\n" +
+                "       g.name                           as genre,\n" +
+                "       b.page_count,\n" +
+                "       b.total_number_of_books,\n" +
+                "       b.left_number_of_books,\n" +
+                "       a.firstname || ' ' || a.lastname as author\n" +
+                "from book b\n" +
+                "         inner join author a on b.author_id = a.id\n" +
+                "         inner join genre g on g.id = b.genre_id\n" +
+                "order by b.id  ";
+        try (Connection connection = new DBConnection().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(GET_ALL_BOOKS_SHOW)
+        ) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                Double cost = resultSet.getDouble("cost");
+                String genre = resultSet.getString("genre");
+                Integer pageCount = resultSet.getInt("page_count");
+                Integer totalNumberOfBooks = resultSet.getInt("total_number_of_books");
+                Integer leftNumberOfBooks = resultSet.getInt("left_number_of_books");
+                String author = resultSet.getString("author");
+                BookShow book = new BookShow(id,
+                        name,
+                        cost,
+                        genre,
+                        pageCount,
+                        totalNumberOfBooks,
+                        leftNumberOfBooks,
+                        author);
+                bookList.add(book);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return bookList;
     }

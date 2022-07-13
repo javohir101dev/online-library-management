@@ -22,29 +22,31 @@
 
 <H1 class="text-uppercase text-center mb-4" style="font-family: 'Times New Roman';">List of Given books to users</H1>
 
-<table class="table table-striped ">
-    <thead>
-    <tr>
-        <th scope="col">Book Id</th>
-        <th scope="col">Book Name</th>
-        <th scope="col">Username</th>
-        <th scope="col">Taken Numbers</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <c:forEach items="${bookUsers}" var="bookUser">
+<section class="d-flex justify-content-center">
+    <table class="w-75 table table-striped ">
+        <thead>
         <tr>
-            <th scope="row">${bookUser.id}</th>
-            <td>${bookUser.bookName}</td>
-            <td>${bookUser.username}</td>
-            <td>${bookUser.takenNumbers}</td>
-
+            <th scope="col">Book Id</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Taken Numbers</th>
         </tr>
-    </c:forEach>
+        </thead>
+        <tbody>
 
-    </tbody>
-</table>
+        <c:forEach items="${bookUsers}" var="bookUser">
+            <tr>
+                <th scope="row">${bookUser.id}</th>
+                <td>${bookUser.bookName}</td>
+                <td>${bookUser.username}</td>
+                <td>${bookUser.takenNumbers}</td>
+
+            </tr>
+        </c:forEach>
+
+        </tbody>
+    </table>
+</section>
 
 </body>
 </html>

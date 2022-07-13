@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/book/getAll")
-public class BookGetAllController extends HttpServlet {
+public class BookGetAll extends HttpServlet {
     private BookService bookService = new BookService();
 
     @Override

@@ -15,7 +15,7 @@ import static helper.DoubleHelper.checkDouble;
 import static helper.IntegerHelper.isDigit;
 
 @WebServlet("/book/edit")
-public class BookControllerEdit extends HttpServlet {
+public class BookEdit extends HttpServlet {
     private BookService bookService = new BookService();
 
     @Override

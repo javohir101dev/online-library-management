@@ -5,6 +5,7 @@ import helper.Validation;
 import helper.messages.AppMessage;
 import mapper.BookMapper;
 import model.BookDto;
+import model.BookShow;
 import model.ResponseDto;
 import model.ValidDto;
 import repository.*;
@@ -126,4 +127,10 @@ public class BookService {
                 :
                 new ResponseDto<>(true, AppMessage.OK, BookMapper.toBookDto(book));
     }
+
+    public ResponseDto<List<BookShow>> getAllShow() {
+        List<BookShow> allBooksShow = bookRepositoryImpl.findAllBooksShow();
+        return new ResponseDto<>(true, AppMessage.OK, allBooksShow);
+    }
+
 }

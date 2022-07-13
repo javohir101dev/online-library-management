@@ -25,33 +25,35 @@
 
 <h1 class="text-uppercase text-center mb-4" style="font-family: 'Times New Roman';">List of books</h1>
 
-<table class="table table-striped ">
-    <thead>
-    <tr>
-        <th scope="col">id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Cost</th>
-        <th scope="col">Genre</th>
-        <th scope="col">Pages</th>
-        <th scope="col">Author</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <c:forEach items="${books}" var="book">
+<section class="d-flex justify-content-center">
+    <table class="w-75 table table-striped ">
+        <thead>
         <tr>
-            <th scope="row">${book.id}</th>
-            <td>${book.name}</td>
-            <td>${book.cost}</td>
-            <td>${book.genre}</td>
-            <td>${book.pageCount}</td>
-            <td>${book.author}</td>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Pages</th>
+            <th scope="col">Author</th>
         </tr>
-    </c:forEach>
+        </thead>
+        <tbody>
+
+        <c:forEach items="${books}" var="book">
+            <tr>
+                <th scope="row">${book.id}</th>
+                <td>${book.name}</td>
+                <td>${book.cost}</td>
+                <td>${book.genre}</td>
+                <td>${book.pageCount}</td>
+                <td>${book.author}</td>
+            </tr>
+        </c:forEach>
 
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</section>
 
 
 <h3 class="text-uppercase text-center mb-4" style="font-family: 'Times New Roman';">Edit your personal account </h3>

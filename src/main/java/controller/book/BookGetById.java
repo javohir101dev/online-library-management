@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/book/findById")
-public class BookGetByIdController extends HttpServlet {
+public class BookGetById extends HttpServlet {
     private BookService bookService =new BookService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

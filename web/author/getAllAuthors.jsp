@@ -13,29 +13,30 @@
 <body>
 
 <h1 class="text-uppercase text-center mb-4" style="font-family: 'Times New Roman';">All Authors</h1>
-
-<table class="table table-striped ">
-    <thead>
-    <tr>
-        <th scope="col">id</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Birth Date</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <c:forEach items="${authors}" var="author">
+<section class="d-flex justify-content-center">
+    <table class=" w-75 table table-striped ">
+        <thead>
         <tr>
-            <th scope="row">${author.id}</th>
-            <td>${author.firstname}</td>
-            <td>${author.lastName}</td>
-            <td>${author.birthDate}</td>
+            <th scope="col">id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Birth Date</th>
         </tr>
-    </c:forEach>
+        </thead>
+        <tbody>
 
-    </tbody>
-</table>
+        <c:forEach items="${authors}" var="author">
+            <tr>
+                <th scope="row">${author.id}</th>
+                <td>${author.firstname}</td>
+                <td>${author.lastName}</td>
+                <td>${author.birthDate}</td>
+            </tr>
+        </c:forEach>
+
+        </tbody>
+    </table>
+</section>
 
 </body>
 </html>

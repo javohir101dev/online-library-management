@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/book/add")
-public class BookAddController extends HttpServlet {
+public class BookAdd extends HttpServlet {
 
     private BookService bookService = new BookService();
 

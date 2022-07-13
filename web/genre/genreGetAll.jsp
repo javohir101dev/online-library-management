@@ -13,23 +13,26 @@
 
 <h1 class="text-uppercase text-center mb-4" style="font-family: 'Times New Roman';">List of genres</h1>
 
-<table class="table table-striped ">
-    <thead>
-    <tr>
-        <th scope="col">id</th>
-        <th scope="col">Name</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <c:forEach items="${genres}" var="genre">
+<section class="d-flex justify-content-center">
+    <table class=" w-75 table table-striped ">
+        <thead>
         <tr>
-            <th scope="row">${genre.id}</th>
-            <td>${genre.name}</td>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
         </tr>
-    </c:forEach>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+
+        <c:forEach items="${genres}" var="genre">
+            <tr>
+                <th scope="row">${genre.id}</th>
+                <td>${genre.name}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</section>
+
 
 </body>
 </html>
