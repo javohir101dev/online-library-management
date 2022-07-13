@@ -1,5 +1,6 @@
 package controller.user;
 
+import helper.Message;
 import security.Security;
 import entity.User;
 import model.ResponseDto;
@@ -16,7 +17,6 @@ import static entity.enums.Roles.ADMIN;
 
 @WebServlet("/user/addAdmin")
 public class AddAdmin extends HttpServlet {
-    Security security = new Security();
     private final UserService userService = new UserService();
 
     @Override
@@ -52,9 +52,9 @@ public class AddAdmin extends HttpServlet {
 //          if user registers it will be automatically registered with ADMIN role
                 User user = new User(firstname, lastName, username, phoneNumber, password, ADMIN.name());
                 ResponseDto responseDto = userService.registerUser(user);
-                writer.write(responseDto.getMessage());
+                Message.print(req, resp, responseDto.getMessage());
             } catch (Exception e) {
-                writer.write("Please enter valid fields");
+                Message.print(req, resp,"Please enter valid fields");
             }
         }
     }

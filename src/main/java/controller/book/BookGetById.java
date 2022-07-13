@@ -1,6 +1,7 @@
 package controller.book;
 
 import helper.IntegerHelper;
+import helper.Message;
 import service.BookService;
 
 import javax.servlet.ServletException;
@@ -24,12 +25,12 @@ public class BookGetById extends HttpServlet {
             String id = req.getParameter("IdBook");
             boolean idBool = IntegerHelper.isDigit(id);
             if(!idBool)
-                resp.getWriter().write("Please enter valid field for Cost");
+                Message.print(req, resp,"Please enter valid field for Cost");
             bookService.getById(Integer.parseInt(id));
 
         }catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write("Error");
+            Message.print(req, resp,"Error");
         }
     }
 }

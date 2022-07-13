@@ -1,6 +1,7 @@
 package controller.genre;
 
 import helper.IntegerHelper;
+import helper.Message;
 import service.GenreService;
 
 import javax.servlet.ServletException;
@@ -25,12 +26,12 @@ public class GenreGetById extends HttpServlet {
             String id = req.getParameter("idGenre");
 
             if (!IntegerHelper.isDigit(id)) {
-                resp.getWriter().write("Please enter right id: ");
+                Message.print(req, resp,"Please enter right id: ");
             }
             genreService.getById(Integer.parseInt(id));
         }catch (Exception e){
             e.printStackTrace();
-            resp.getWriter().write("Error please right id: ");
+            Message.print(req, resp,"Error please right id: ");
         }
 
     }

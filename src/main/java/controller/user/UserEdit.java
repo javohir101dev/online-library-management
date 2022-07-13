@@ -1,6 +1,7 @@
 package controller.user;
 
 import entity.User;
+import helper.Message;
 import model.ResponseDto;
 import model.UserUpdateDto;
 import service.UserService;
@@ -29,7 +30,6 @@ public class UserEdit extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
         try {
             String firstname = req.getParameter("firstname");
             String lastName = req.getParameter("lastName");
@@ -40,9 +40,9 @@ public class UserEdit extends HttpServlet {
 //          if user registers it will be automatically registered with USER role
             UserUpdateDto user = new UserUpdateDto(firstname, lastName, oldUsername, newUsername, phoneNumber, password);
             ResponseDto responseDto = userService.editUser(user);
-            writer.write(responseDto.getMessage());
+            Message.print(req, resp, responseDto.getMessage());
         } catch (Exception e) {
-            writer.write("Please enter valid fields");
+            Message.print(req, resp, "Please enter valid fields");
         }
     }
 }

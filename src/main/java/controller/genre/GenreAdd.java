@@ -1,5 +1,6 @@
 package controller.genre;
 
+import helper.Message;
 import model.GenreDto;
 import model.ResponseDto;
 import service.GenreService;
@@ -26,7 +27,6 @@ public class GenreAdd extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
         try {
             String name = req.getParameter("nameGenre");
             GenreDto genreDto = GenreDto
@@ -34,10 +34,10 @@ public class GenreAdd extends HttpServlet {
                     .name(name)
                     .build();
             ResponseDto<GenreDto> genreDtoResponseDto = genreService.addGenre(genreDto);
-            writer.write(genreDtoResponseDto.getMessage());
+            Message.print(req, resp,genreDtoResponseDto.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            writer.write("Error please enter right name for genre");
+            Message.print(req, resp,"Error please enter right name for genre");
         }
     }
 }

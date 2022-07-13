@@ -1,5 +1,6 @@
 package controller.genre;
 
+import helper.Message;
 import model.GenreDto;
 import model.ResponseDto;
 import service.GenreService;
@@ -24,7 +25,7 @@ public class GenreGetAll extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/genre/genreGetAll.jsp");
             requestDispatcher.forward(req, resp);
         } else {
-            resp.getWriter().write(responseDto.getMessage());
+            Message.print(req, resp,responseDto.getMessage());
         }
     }
 }

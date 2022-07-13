@@ -1,5 +1,6 @@
 package controller.book_user;
 
+import helper.Message;
 import model.BookUserDto;
 import model.ResponseDto;
 import service.BookUserService;
@@ -28,10 +29,10 @@ public class BookUserControllerTake extends HttpServlet {
             Integer numberOfBooks = Integer.valueOf(req.getParameter("numberOfBooks"));
             BookUserDto dto = new BookUserDto(username, bookId, numberOfBooks);
             ResponseDto responseDto = service.takeBookFromUser(dto);
-            resp.getWriter().write(responseDto.getMessage());
+            Message.print(req, resp,responseDto.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write("Please enter valid fields" + e.getMessage());
+            Message.print(req, resp,"Please enter valid fields" + e.getMessage());
         }
     }
 }

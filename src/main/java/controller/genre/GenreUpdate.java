@@ -1,6 +1,7 @@
 package controller.genre;
 
 import helper.IntegerHelper;
+import helper.Message;
 import model.GenreDto;
 import model.ResponseDto;
 import service.GenreService;
@@ -24,7 +25,6 @@ public class GenreUpdate extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
         try {
             String id = req.getParameter("idGenre");
             if (!IntegerHelper.isDigit(id)) {
@@ -33,10 +33,10 @@ public class GenreUpdate extends HttpServlet {
             String name = req.getParameter("nameGenre");
             GenreDto genreDto = new GenreDto(Integer.parseInt(id), name);
             ResponseDto<GenreDto> responseDto = genreService.update(genreDto);
-            writer.write(responseDto.getMessage());
+            Message.print(req, resp,responseDto.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            writer.write("Error please enter valid name or id");
+            Message.print(req, resp,"Error please enter valid name or id");
         }
     }
 }

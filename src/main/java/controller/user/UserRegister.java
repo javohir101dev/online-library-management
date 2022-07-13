@@ -1,6 +1,7 @@
 package controller.user;
 
 import entity.User;
+import helper.Message;
 import model.ResponseDto;
 import service.UserService;
 
@@ -20,7 +21,6 @@ public class UserRegister extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
         try {
             String firstname = req.getParameter("firstname");
             String lastName = req.getParameter("lastName");
@@ -33,10 +33,10 @@ public class UserRegister extends HttpServlet {
             if (responseDto.isSuccess()) {
                 resp.sendRedirect("/user/login");
             } else {
-                writer.write(responseDto.getMessage());
+                Message.print(req, resp, responseDto.getMessage());
             }
         } catch (Exception e) {
-            writer.write("Please enter valid fields");
+            Message.print(req, resp, "Please enter valid fields");
         }
     }
 }

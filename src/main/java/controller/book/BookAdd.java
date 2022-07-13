@@ -1,5 +1,6 @@
 package controller.book;
 
+import helper.Message;
 import model.BookDto;
 import model.ResponseDto;
 import service.BookService;
@@ -41,15 +42,15 @@ public class BookAdd extends HttpServlet {
             boolean authorIdBol = isDigit(authorId);
 
             if (!genreIdValid) {
-                resp.getWriter().write("Please enter valid field for Genre Id");
+                Message.print(req, resp,"Please enter valid field for Genre Id");
             } else if (!total) {
-                resp.getWriter().write("Please enter valid field for Number of Books");
+                Message.print(req, resp,"Please enter valid field for Number of Books");
             } else if (!pageCountBol) {
-                resp.getWriter().write("Please enter valid field for Page Count");
+                Message.print(req, resp,"Please enter valid field for Page Count");
             } else if (!authorIdBol) {
-                resp.getWriter().write("Please enter valid field for Author Id");
+                Message.print(req, resp,"Please enter valid field for Author Id");
             } else if (!costBol) {
-                resp.getWriter().write("Please enter valid field for Cost");
+                Message.print(req, resp,"Please enter valid field for Cost");
             } else {
                 BookDto bookDto = BookDto.builder()
                         .name(bookName)
@@ -60,11 +61,11 @@ public class BookAdd extends HttpServlet {
                         .authorId(Integer.parseInt(authorId))
                         .build();
                 ResponseDto<BookDto> responseDto = bookService.addBook(bookDto);
-                resp.getWriter().write(responseDto.getMessage());
+                Message.print(req, resp,responseDto.getMessage());
             }
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write("Error");
+            Message.print(req, resp,"Error");
         }
     }
 }

@@ -1,5 +1,7 @@
 package controller.book;
 
+import helper.Message;
+import helper.messages.AppMessage;
 import model.BookDto;
 import model.ResponseDto;
 import service.BookService;
@@ -13,6 +15,7 @@ import java.io.IOException;
 
 import static helper.DoubleHelper.checkDouble;
 import static helper.IntegerHelper.isDigit;
+import static helper.messages.AppMessage.ERROR;
 
 @WebServlet("/book/edit")
 public class BookEdit extends HttpServlet {
@@ -24,7 +27,7 @@ public class BookEdit extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
             String id = req.getParameter("IdBook");
             String bookName = req.getParameter("NameBook");
@@ -43,19 +46,19 @@ public class BookEdit extends HttpServlet {
             boolean authorIdBol = isDigit(authorId);
             boolean idBool = isDigit(id);
             if (!genreIdValid) {
-                resp.getWriter().write("Please enter valid field for Genre id");
+                Message.print(req, resp, "Please enter valid field for Genre id");
             } else if (!idBool) {
-                resp.getWriter().write("Please enter valid field for Book id");
+                Message.print(req, resp, "Please enter valid field for Book id");
             } else if (!total) {
-                resp.getWriter().write("Please enter valid field for Total Number of Books");
+                Message.print(req, resp, "Please enter valid field for Total Number of Books");
             } else if (!leftCountValid) {
-                resp.getWriter().write("Please enter valid field for Left Number of Books");
+                Message.print(req, resp, "Please enter valid field for Left Number of Books");
             } else if (!pageCountBol) {
-                resp.getWriter().write("Please enter valid field for Page Count");
+                Message.print(req, resp, "Please enter valid field for Page Count");
             } else if (!authorIdBol) {
-                resp.getWriter().write("Please enter valid field for Author Id");
+                Message.print(req, resp, "Please enter valid field for Author Id");
             } else if (!costBol) {
-                resp.getWriter().write("Please enter valid field for Cost");
+                Message.print(req, resp, "Please enter valid field for Cost");
                 resp.sendError(400, "BAD REQUEST");
             } else {
                 BookDto bookDto = BookDto.builder()
@@ -69,11 +72,11 @@ public class BookEdit extends HttpServlet {
                         .authorId(Integer.parseInt(authorId))
                         .build();
                 ResponseDto<BookDto> responseDto = bookService.update(bookDto);
-                resp.getWriter().write(responseDto.getMessage());
+                Message.print(req, resp, responseDto.getMessage());
             }
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write("Something went wrong. Please try again!");
+            Message.print(req, resp, ERROR);
         }
     }
 }

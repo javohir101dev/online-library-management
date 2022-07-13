@@ -1,6 +1,7 @@
 package controller.book;
 
 import helper.IntegerHelper;
+import helper.Message;
 import helper.messages.AppMessage;
 import model.ResponseDto;
 import service.BookService;
@@ -30,12 +31,12 @@ public class BookDelete extends HttpServlet {
             String id = req.getParameter("IdBook");
             boolean idBool = IntegerHelper.isDigit(id);
             if(!idBool)
-                writer.write("Please enter valid field for Book Id");
+                Message.print(req, resp,"Please enter valid field for Book Id");
             ResponseDto<?> responseDto = bookService.delete(Integer.parseInt(id));
-            writer.write(responseDto.getMessage());
+            Message.print(req, resp,responseDto.getMessage());
         }catch (Exception e) {
             e.printStackTrace();
-            writer.write(ERROR);
+            Message.print(req, resp,ERROR);
         }
     }
 }

@@ -1,5 +1,6 @@
 package controller.book;
 
+import helper.Message;
 import model.BookDto;
 import model.ResponseDto;
 import service.BookService;
@@ -25,7 +26,7 @@ public class BookGetAll extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("bookGetAll.jsp");
             requestDispatcher.forward(req,resp);
         }else {
-            resp.getWriter().write(responseDto.getMessage());
+            Message.print(req, resp,responseDto.getMessage());
         }
     }
 }

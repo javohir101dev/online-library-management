@@ -1,5 +1,6 @@
 package controller.book;
 
+import helper.Message;
 import model.BookDto;
 import model.BookShow;
 import model.ResponseDto;
@@ -25,9 +26,9 @@ public class BookGetShow extends HttpServlet {
         if (responseDto.isSuccess()) {
             req.setAttribute("books", responseDto.getData());
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/book/getAllShow.jsp");
-            requestDispatcher.forward(req,resp);
-        }else {
-            resp.getWriter().write(responseDto.getMessage());
+            requestDispatcher.forward(req, resp);
+        } else {
+            Message.print(req, resp, responseDto.getMessage());
         }
     }
 }

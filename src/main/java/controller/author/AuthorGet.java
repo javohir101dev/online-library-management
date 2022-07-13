@@ -1,5 +1,6 @@
 package controller.author;
 
+import helper.Message;
 import model.AuthorDto;
 import model.ResponseDto;
 import security.Security;
@@ -26,7 +27,7 @@ public class AuthorGet extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/author/getAllAuthors.jsp");
             requestDispatcher.forward(req, resp);
         } else {
-            resp.getWriter().write(responseDto.getMessage());
+            Message.print(req, resp,responseDto.getMessage());
         }
     }
 }

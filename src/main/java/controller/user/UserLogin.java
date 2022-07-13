@@ -1,5 +1,6 @@
 package controller.user;
 
+import helper.Message;
 import repository.BookRepository;
 import security.Security;
 import entity.User;
@@ -14,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import static entity.enums.Roles.ADMIN;
@@ -39,7 +41,7 @@ public class UserLogin extends HttpServlet {
             LoginUserDto loginUserDto = new LoginUserDto(username, password);
             ResponseDto responseDto = userService.loginService(loginUserDto);
             if (!responseDto.isSuccess()) {
-                resp.getWriter().write(responseDto.getMessage());
+                Message.print(req, resp, responseDto.getMessage());
             } else {
 
 //               Adding security with cookie and session
@@ -57,12 +59,12 @@ public class UserLogin extends HttpServlet {
                     RequestDispatcher requestDispatcher = req.getRequestDispatcher("/user/cabinetAdmin");
                     requestDispatcher.forward(req, resp);
                 } else {
-                    resp.getWriter().write(ERROR);
+                    Message.print(req, resp, ERROR);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write("Please enter valid username or password");
+            Message.print(req, resp, "Please enter valid username or password");
         }
     }
 }

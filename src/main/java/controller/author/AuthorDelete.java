@@ -1,6 +1,7 @@
 package controller.author;
 
 import helper.IntegerHelper;
+import helper.Message;
 import model.ResponseDto;
 import security.Security;
 import service.AuthorService;
@@ -29,19 +30,18 @@ public class AuthorDelete extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
         try {
             String id = req.getParameter("authorId");
             boolean idBool = IntegerHelper.isDigit(id);
             if (!idBool) {
-                writer.write("Please enter valid field for authorId");
+                Message.print(req, resp,"Please enter valid field for authorId");
             } else {
                 ResponseDto<String> responseDto = authorService.delete(Integer.parseInt(id));
-                writer.write(responseDto.getMessage());
+                Message.print(req, resp,responseDto.getMessage());
             }
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write(ERROR);
+            Message.print(req, resp,ERROR);
         }
     }
 }

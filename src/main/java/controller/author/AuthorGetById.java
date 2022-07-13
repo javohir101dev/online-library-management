@@ -1,6 +1,7 @@
 package controller.author;
 
 import helper.IntegerHelper;
+import helper.Message;
 import security.Security;
 import service.AuthorService;
 
@@ -37,7 +38,7 @@ public class AuthorGetById extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write("Error");
+            Message.print(req, resp,"Error");
         }
     }
 }

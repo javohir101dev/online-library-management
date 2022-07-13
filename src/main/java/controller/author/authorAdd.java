@@ -1,6 +1,7 @@
 package controller.author;
 
 import helper.DateHelper;
+import helper.Message;
 import model.AuthorDto;
 import model.ResponseDto;
 import security.Security;
@@ -35,7 +36,7 @@ public class authorAdd extends HttpServlet {
             String birthdate = req.getParameter("birthdate");
 
             if (!DateHelper.checkDate(birthdate))
-                resp.getWriter().write("Please enter valid Date in form (yyyy-MM-dd)");
+                Message.print(req, resp, "Please enter valid Date in form (yyyy-MM-dd)");
             AuthorDto authorDto = AuthorDto.builder()
                     .firstname(firstname)
                     .lastName(lastname)
@@ -43,13 +44,13 @@ public class authorAdd extends HttpServlet {
                     .build();
             ResponseDto<AuthorDto> responseDto = authorService.addAuthor(authorDto);
             if (responseDto.isSuccess()) {
-                resp.getWriter().write(responseDto.getMessage());
+                Message.print(req, resp, responseDto.getMessage());
             } else {
-                resp.getWriter().write(responseDto.getError().toString());
+                Message.print(req, resp, responseDto.getError().toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write(ERROR);
+            Message.print(req, resp, ERROR);
         }
     }
 }

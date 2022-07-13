@@ -2,6 +2,7 @@ package controller.author;
 
 import helper.DateHelper;
 import helper.IntegerHelper;
+import helper.Message;
 import model.AuthorDto;
 import model.ResponseDto;
 import security.Security;
@@ -32,7 +33,6 @@ public class AuthorEdit extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
         try {
             String id = req.getParameter("id");
             String firstname = req.getParameter("firstName");
@@ -40,13 +40,13 @@ public class AuthorEdit extends HttpServlet {
             String birthDate = req.getParameter("birthDate");
 
             if (id == null || !IntegerHelper.isDigit(id)) {
-                writer.write("Please enter valid Id");
+                Message.print(req, resp,"Please enter valid Id");
             } else if (firstname == null) {
-                writer.write("Please enter valid First Name");
+                Message.print(req, resp,"Please enter valid First Name");
             } else if (lastname == null) {
-                writer.write("Please enter valid Last Name");
+                Message.print(req, resp,"Please enter valid Last Name");
             } else if (birthDate == null || !DateHelper.checkDate(birthDate)) {
-                writer.write("Please enter valid birthDate");
+                Message.print(req, resp,"Please enter valid birthDate");
             } else {
                 AuthorDto authorDto = AuthorDto.builder()
                         .id(Integer.parseInt(id))
@@ -55,11 +55,11 @@ public class AuthorEdit extends HttpServlet {
                         .birthDate(Date.valueOf(birthDate))
                         .build();
                 ResponseDto<AuthorDto> responseDto = authorService.update(authorDto);
-                writer.write(responseDto.getMessage());
+                Message.print(req, resp,responseDto.getMessage());
             }
         } catch (Exception e) {
             e.printStackTrace();
-            writer.write(ERROR);
+            Message.print(req, resp,ERROR);
         }
     }
 }
