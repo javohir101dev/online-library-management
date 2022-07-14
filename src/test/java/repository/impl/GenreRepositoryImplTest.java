@@ -1,4 +1,4 @@
-package java.repository.impl;
+package repository.impl;
 
 import entity.Genre;
 import org.junit.jupiter.api.AfterAll;

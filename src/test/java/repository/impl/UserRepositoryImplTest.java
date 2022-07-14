@@ -1,4 +1,4 @@
-package java.repository.impl;
+package repository.impl;
 
 import entity.User;
 import entity.enums.Roles;

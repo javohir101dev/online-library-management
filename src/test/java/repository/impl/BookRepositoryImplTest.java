@@ -1,4 +1,4 @@
-package java.repository.impl;
+package repository.impl;
 
 import entity.Author;
 import entity.Book;
@@ -7,7 +7,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import repository.BookRepository;
-import repository.impl.BookRepositoryImpl;
 
 import java.util.Optional;
 

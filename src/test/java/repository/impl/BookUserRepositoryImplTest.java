@@ -1,4 +1,4 @@
-package java.repository.impl;
+package repository.impl;
 
 import entity.Book;
 import entity.BookUser;
@@ -6,12 +6,9 @@ import entity.User;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import repository.BookRepository;
 import repository.BookUserRepository;
-import repository.impl.BookUserRepositoryImpl;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Optional;
 

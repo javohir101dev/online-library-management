@@ -1,12 +1,10 @@
-package java.repository.impl;
+package repository.impl;
 
 import entity.Author;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import repository.AuthorRepository;
-import repository.impl.AuthorRepositoryImpl;
 
 import java.sql.Date;
 import java.time.LocalDate;
