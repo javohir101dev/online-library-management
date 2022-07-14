@@ -1,7 +1,9 @@
 package controller.user;
 
 import entity.User;
+import helper.IntegerHelper;
 import helper.Message;
+import model.BookDto;
 import model.ResponseDto;
 import model.UserUpdateDto;
 import service.UserService;
@@ -16,6 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import static entity.enums.Roles.USER;
+import static helper.messages.AppMessage.ERROR;
 
 @WebServlet("/user/edit")
 public class UserEdit extends HttpServlet {
@@ -24,8 +27,23 @@ public class UserEdit extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/user/userEdit.jsp");
-        requestDispatcher.forward(req, resp);
+        try {
+            String id = req.getParameter("id");
+            if (id == null || !IntegerHelper.isDigit(id)) {
+                Message.print(req, resp, "Please enter valid Id");
+            } else {
+                ResponseDto<User> responseDto = userService.getById(Integer.parseInt(id));
+                if (responseDto.isSuccess()) {
+
+                    User user = responseDto.getData();
+                    req.setAttribute("user", user);
+                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/user/userEdit.jsp");
+                    requestDispatcher.forward(req, resp);
+                }
+            }
+        } catch (Exception e) {
+            Message.print(req, resp, ERROR);
+        }
     }
 
     @Override

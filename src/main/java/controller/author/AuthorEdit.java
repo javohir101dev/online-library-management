@@ -3,8 +3,11 @@ package controller.author;
 import helper.DateHelper;
 import helper.IntegerHelper;
 import helper.Message;
+import helper.messages.AppMessage;
 import model.AuthorDto;
 import model.ResponseDto;
+import repository.AuthorRepository;
+import repository.impl.AuthorRepositoryImpl;
 import security.Security;
 import service.AuthorService;
 
@@ -26,8 +29,24 @@ public class AuthorEdit extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/author/editAuthor.jsp");
-        requestDispatcher.forward(req, resp);
+
+        try {
+            String id = req.getParameter("id");
+            if (id == null || !IntegerHelper.isDigit(id)) {
+                Message.print(req, resp, "Please enter valid Id");
+            } else {
+                ResponseDto<AuthorDto> responseDto = authorService.getById(Integer.parseInt(id));
+                if (responseDto.isSuccess()) {
+
+                    AuthorDto authorDto = responseDto.getData();
+                    req.setAttribute("author", authorDto);
+                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/author/editAuthor.jsp");
+                    requestDispatcher.forward(req, resp);
+                }
+            }
+        } catch (Exception e) {
+            Message.print(req, resp, ERROR);
+        }
     }
 
 
@@ -38,15 +57,16 @@ public class AuthorEdit extends HttpServlet {
             String firstname = req.getParameter("firstName");
             String lastname = req.getParameter("lastName");
             String birthDate = req.getParameter("birthDate");
+            req.getParameter("authorId");
 
             if (id == null || !IntegerHelper.isDigit(id)) {
-                Message.print(req, resp,"Please enter valid Id");
+                Message.print(req, resp, "Please enter valid Id");
             } else if (firstname == null) {
-                Message.print(req, resp,"Please enter valid First Name");
+                Message.print(req, resp, "Please enter valid First Name");
             } else if (lastname == null) {
-                Message.print(req, resp,"Please enter valid Last Name");
+                Message.print(req, resp, "Please enter valid Last Name");
             } else if (birthDate == null || !DateHelper.checkDate(birthDate)) {
-                Message.print(req, resp,"Please enter valid birthDate");
+                Message.print(req, resp, "Please enter valid birthDate");
             } else {
                 AuthorDto authorDto = AuthorDto.builder()
                         .id(Integer.parseInt(id))
@@ -55,11 +75,11 @@ public class AuthorEdit extends HttpServlet {
                         .birthDate(Date.valueOf(birthDate))
                         .build();
                 ResponseDto<AuthorDto> responseDto = authorService.update(authorDto);
-                Message.print(req, resp,responseDto.getMessage());
+                Message.print(req, resp, responseDto.getMessage());
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Message.print(req, resp,ERROR);
+            Message.print(req, resp, ERROR);
         }
     }
 }

@@ -24,7 +24,8 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="IdBook" type="text" placeholder="Id Book"
+                                        <input value="${book.id}" readonly name="IdBook" type="text"
+                                               placeholder="Id Book"
                                                id="form3Example1c" class="form-control"/>
                                         <label class="form-label" for="form3Example1c">Id Book</label>
                                     </div>
@@ -32,7 +33,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="NameBook" type="text" placeholder="Name book"
+                                        <input value="${book.name}" name="NameBook" type="text" placeholder="Name book"
                                                id="form3Example2c" class="form-control"/>
                                         <label class="form-label" for="form3Example1c">Name book</label>
                                     </div>
@@ -41,7 +42,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="Cost" placeholder="Cost" type="text"
+                                        <input value="${book.cost}" name="Cost" placeholder="Cost" type="text"
                                                id="form3Example4c" class="form-control"/>
                                         <label class="form-label" for="form3Example3c">Cost</label>
                                     </div>
@@ -50,7 +51,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="genreId" placeholder="Genre Id" type="text"
+                                        <input value="${book.genreId}" name="genreId" placeholder="Genre Id" type="text"
                                                id="form3Example5c" class="form-control"/>
                                         <label class="form-label" for="form3Example4c">Genre Id</label>
                                     </div>
@@ -58,7 +59,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="PageCount" placeholder="Page count" type="text"
+                                        <input value="${book.pageCount}" name="PageCount" placeholder="Page count" type="text"
                                                id="form3Example6c" class="form-control"/>
                                         <label class="form-label" for="form3Example4c">Page count</label>
                                     </div>
@@ -66,7 +67,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="TotalCount" placeholder="Number of Books" type="text"
+                                        <input value="${book.totalNumberOfBooks}" name="TotalCount" placeholder="Number of Books" type="text"
                                                id="form3Example7c" class="form-control"/>
                                         <label class="form-label" for="form3Example4c">Number of Books</label>
                                     </div>
@@ -74,7 +75,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="leftCount" type="text" placeholder="Left Number of Books"
+                                        <input value="${book.leftNumberOfBooks}" name="leftCount" type="text" placeholder="Left Number of Books"
                                                id="form3Example3c" class="form-control"/>
                                         <label class="form-label" for="form3Example1c">Left Number of Books</label>
                                     </div>
@@ -82,7 +83,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="AuthorId" placeholder="AuthorId" type="text"
+                                        <input value="${book.authorId}" name="AuthorId" placeholder="AuthorId" type="text"
                                                id="form3Example8c" class="form-control"/>
                                         <label class="form-label" for="form3Example4c">AuthorId</label>
                                     </div>

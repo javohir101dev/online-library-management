@@ -82,6 +82,11 @@ public class UserService {
         return new ResponseDto<>(true, OK, allUsers);
     }
 
+    public ResponseDto<User> getById(Integer userId) {
+        User user = userRepository.getUserById(userId);
+        return new ResponseDto<>(true, OK, user);
+    }
+
     public ResponseDto deleteUserById(String username) {
 
         User userByUsername = userRepository.findUserByUsername(username);
@@ -90,13 +95,13 @@ public class UserService {
                     format("User with username: %s is not found", username));
         }
         int bookUserCount = bookUserRepository.countUsersBookByUserid(userByUsername.getId());
-        if (bookUserCount > 0){
+        if (bookUserCount > 0) {
             return new ResponseDto(false, String.
                     format("You first take(receive) books from user  with username: %s", username));
         }
 
         boolean isDeleted = userRepository.deleteUserById(userByUsername.getId());
-        if (isDeleted){
+        if (isDeleted) {
             return new ResponseDto(true, String
                     .format("User with username: %s is deleted successfully!", username));
         }

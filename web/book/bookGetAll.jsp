@@ -26,6 +26,7 @@
             <th scope="col">Total Numbers</th>
             <th scope="col">Left numbers</th>
             <th scope="col">Author Id</th>
+
         </tr>
         </thead>
         <tbody>
@@ -40,6 +41,16 @@
                 <td>${book.totalNumberOfBooks}</td>
                 <td>${book.leftNumberOfBooks}</td>
                 <td>${book.authorId}</td>
+                <td>
+                    <form action="/book/edit" method="get">
+                        <button class="btn btn-success" type="submit" value="${book.id}" name="id">Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/book/delete" method="post">
+                        <button class="btn btn-danger" type="submit" value="${book.id}" name="IdBook">Delete</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
 

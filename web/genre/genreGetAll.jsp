@@ -27,6 +27,17 @@
             <tr>
                 <th scope="row">${genre.id}</th>
                 <td>${genre.name}</td>
+                <td>
+                    <form action="/genre-update" method="get">
+                        <button class="btn btn-success" type="submit" value="${genre.id}" name="id">Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/genre-delete" method="post">
+                        <button class="btn btn-danger" type="submit" value="${genre.id}" name="idGenre">Delete</button>
+                    </form>
+                </td>
+
             </tr>
         </c:forEach>
         </tbody>

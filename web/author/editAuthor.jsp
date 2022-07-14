@@ -25,7 +25,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="id" type="text" placeholder="Id"
+                                        <input readonly   name="id"  value="${author.id}" type="text" placeholder="Id"
                                                id="form3Example1c" class="form-control"/>
                                         <label class="form-label" for="form3Example1c">Author Id</label>
                                     </div>
@@ -34,7 +34,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="firstName" type="text" placeholder="First Name"
+                                        <input value="${author.firstname}" name="firstName" type="text" placeholder="First Name"
                                                id="form3Example2c" class="form-control"/>
                                         <label class="form-label" for="form3Example1c">Your Name</label>
                                     </div>
@@ -43,7 +43,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="lastName" placeholder="Last Name" type="text"
+                                        <input value="${author.lastName}" name="lastName" placeholder="Last Name" type="text"
                                                id="form3Example3c" class="form-control"/>
                                         <label class="form-label" for="form3Example3c">Your Email</label>
                                     </div>
@@ -52,7 +52,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="birthDate" placeholder="yyyy-MM-dd" type="text"
+                                        <input value="${author.birthDate}" name="birthDate" placeholder="yyyy-MM-dd" type="text"
                                                id="form3Example4c" class="form-control"/>
                                         <label class="form-label" for="form3Example4c">Birth Date(yyyy-MM-dd)</label>
                                     </div>

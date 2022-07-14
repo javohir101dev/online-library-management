@@ -36,7 +36,6 @@ public class AddAdmin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
 
         boolean hasPermission = Security.hasPermission(req);
 

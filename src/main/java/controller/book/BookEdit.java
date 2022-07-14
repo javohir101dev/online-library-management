@@ -1,11 +1,14 @@
 package controller.book;
 
+import helper.IntegerHelper;
 import helper.Message;
 import helper.messages.AppMessage;
+import model.AuthorDto;
 import model.BookDto;
 import model.ResponseDto;
 import service.BookService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +26,23 @@ public class BookEdit extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/book/editBook.jsp");
+        try {
+            String id = req.getParameter("id");
+            if (id == null || !IntegerHelper.isDigit(id)) {
+                Message.print(req, resp, "Please enter valid Id");
+            } else {
+                ResponseDto<BookDto> responseDto = bookService.getById(Integer.parseInt(id));
+                if (responseDto.isSuccess()) {
+
+                    BookDto bookDto = responseDto.getData();
+                    req.setAttribute("book", bookDto);
+                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/book/editBook.jsp");
+                    requestDispatcher.forward(req, resp);
+                }
+            }
+        } catch (Exception e) {
+            Message.print(req, resp, ERROR);
+        }
     }
 
     @Override

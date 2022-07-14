@@ -62,7 +62,7 @@ public class AuthorService {
                             authorId));
         }
         Integer usedBookId = authorRepository.authorBookWithAuthorId(authorId);
-        if (usedBookId != null){
+        if (usedBookId != null) {
             return new ResponseDto<>(false, String
                     .format("Author with id: %s is used book with id: %s. Please first delete book with id: %s",
                             authorId, usedBookId, usedBookId));

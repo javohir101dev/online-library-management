@@ -27,7 +27,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="firstname" type="text" placeholder="Firstname"
+                                        <input value="${user.firstname}" name="firstname" type="text" placeholder="Firstname"
                                                id="form3Example1c" class="form-control"/>
                                         <label class="form-label" for="form3Example1c">Firstname</label>
                                     </div>
@@ -36,7 +36,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="lastName" placeholder="LastName" type="text"
+                                        <input value="${user.lastName}" name="lastName" placeholder="LastName" type="text"
                                                id="form3Example3c" class="form-control"/>
                                         <label class="form-label" for="form3Example3c">LastName</label>
                                     </div>
@@ -45,7 +45,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="oldUsername" placeholder="Old Username" type="text"
+                                        <input value="${user.username}" name="oldUsername" placeholder="Old Username" type="text"
                                                id="form3Example4c" class="form-control"/>
                                         <label class="form-label" for="form3Example4c">Old Username</label>
                                     </div>
@@ -53,7 +53,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="newUsername" placeholder="New Username" type="text"
+                                        <input  name="newUsername" placeholder="New Username" type="text"
                                                id="form3Example5c" class="form-control"/>
                                         <label class="form-label" for="form3Example4c">New Username</label>
                                     </div>
@@ -62,7 +62,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="phoneNumber" placeholder="Phone Number" type="text"
+                                        <input value="${user.phoneNumber}" name="phoneNumber" placeholder="Phone Number" type="text"
                                                id="form3Example6c" class="form-control"/>
                                         <label class="form-label" for="form3Example4c">Phone Number</label>
                                     </div>
@@ -70,7 +70,7 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input name="password" placeholder="Password" type="text"
+                                        <input value="${user.password}" name="password" placeholder="Password" type="text"
                                                id="form3Example7c" class="form-control"/>
                                         <label class="form-label" for="form3Example4c">Password</label>
                                     </div>

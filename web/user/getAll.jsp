@@ -37,6 +37,16 @@
                 <td>${user.username}</td>
                 <td>${user.phoneNumber}</td>
                 <td>${user.role}</td>
+                <td>
+                    <form action="/user/edit" method="get">
+                        <button class="btn btn-success" type="submit" value="${user.id}" name="id">Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/user/delete" method="post">
+                        <button class="btn btn-danger" type="submit" value="${user.username}" name="username">Delete</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
 

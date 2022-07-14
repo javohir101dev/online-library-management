@@ -10,18 +10,14 @@
     <title>Login</title>
 </head>
 <body>
-<p>
-<p>
-<p>
-
-<div class="text-center">
-    <br>
-    <h2 class="text-uppercase text-center mb-4" style="font-family: 'Times New Roman';"> Welcome to our online
-        Library Login page </h2>
-</div>
 
 <section class="vh-100" style="background-color: #eee;">
-    <div class="container h-100">
+    <div class="text-center mb-3">
+        <br>
+        <h2 class="text-uppercase text-center " style="font-family: 'Times New Roman';"> Welcome to our online
+            Library Register page </h2>
+    </div>
+    <div class="container h-auto">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-12 col-xl-11">
                 <div class="card text-black" style="border-radius: 25px;">

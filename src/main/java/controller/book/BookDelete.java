@@ -26,7 +26,6 @@ public class BookDelete extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
         try {
             String id = req.getParameter("IdBook");
             boolean idBool = IntegerHelper.isDigit(id);
