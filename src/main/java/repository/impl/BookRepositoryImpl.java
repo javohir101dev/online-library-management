@@ -291,7 +291,7 @@ public class BookRepositoryImpl implements BookRepository {
                 " from book b " +
                 "         inner join author a on b.author_id = a.id " +
                 "         inner join genre g on g.id = b.genre_id " +
-                " where upper(b.name) like upper('%' || '" + search + "' || '%')" +
+                " where upper(b.name || g.name || a.firstname || ' ' || a.lastname) like upper('%' || '" + search + "' || '%')" +
                 "order by b.id  ";
 
         try (Connection connection = new DBConnection().getConnection();
