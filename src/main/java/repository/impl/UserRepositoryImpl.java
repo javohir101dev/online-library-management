@@ -183,4 +183,39 @@ public class UserRepositoryImpl implements UserRepository {
         return false;
     }
 
+    @Override
+    public List<User> findAllUsersSearch(String search) {
+        List<User> userList = new ArrayList<>();
+        String GET_ALL_USERS_SEARCH = "select * " +
+                " from users u " +
+                " where upper(u.firstname || u.lastname || u.username || u.phone_number) " +
+                "          like upper('%' || '" + search + "' || '%') ";
+
+        try (Connection connection = new DBConnection().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(GET_ALL_USERS_SEARCH)
+        ) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String firstname = resultSet.getString("firstname");
+                String lastName = resultSet.getString("lastName");
+                String username = resultSet.getString("username");
+                String phoneNumber = resultSet.getString("phone_number");
+                String password = resultSet.getString("password");
+                String role = resultSet.getString("role");
+                User user = new User(id,
+                        firstname,
+                        lastName,
+                        username,
+                        phoneNumber,
+                        password,
+                        role);
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return userList;
+    }
 }

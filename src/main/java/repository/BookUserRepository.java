@@ -49,4 +49,5 @@ public interface BookUserRepository {
      */
      int countUsersBookByUserid(Integer userId);
 
+    List<BookUserAll> findAllBookUserAllSearch(String search);
 }

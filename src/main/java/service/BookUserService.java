@@ -3,6 +3,7 @@ package service;
 import entity.Book;
 import entity.BookUser;
 import entity.User;
+import helper.StringHelper;
 import helper.messages.AppMessage;
 import model.BookUserAll;
 import model.BookUserDto;
@@ -121,5 +122,13 @@ public class BookUserService {
     public ResponseDto allGivenBooks(){
         List<BookUserAll> allTakenBooks = bookUserRepository.getAllGivenBooks();
         return new ResponseDto(true, AppMessage.OK, allTakenBooks);
+    }
+
+    public ResponseDto<List<BookUserAll>> getAllBookUserAllSearch(String search) {
+        if (!StringHelper.isValid(search)){
+            return new ResponseDto<>(false, "Word for searching cannot be blank(empty)");
+        }
+        List<BookUserAll> bookUserList = bookUserRepository.findAllBookUserAllSearch(search);
+        return new ResponseDto<>(true, AppMessage.OK, bookUserList);
     }
 }

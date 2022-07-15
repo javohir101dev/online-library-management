@@ -44,4 +44,6 @@ public interface UserRepository {
      */
     public boolean deleteUserById(Integer userId);
 
+
+    List<User> findAllUsersSearch(String search);
 }

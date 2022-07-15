@@ -1,8 +1,11 @@
 package service;
 
 
+import entity.Genre;
 import entity.User;
 import entity.enums.Roles;
+import helper.Message;
+import helper.StringHelper;
 import helper.Validation;
 import helper.messages.AppMessage;
 import model.LoginUserDto;
@@ -14,6 +17,7 @@ import repository.UserRepository;
 import repository.impl.BookUserRepositoryImpl;
 import repository.impl.UserRepositoryImpl;
 
+import javax.servlet.RequestDispatcher;
 import java.util.List;
 
 import static helper.messages.AppMessage.ERROR;
@@ -106,5 +110,13 @@ public class UserService {
                     .format("User with username: %s is deleted successfully!", username));
         }
         return new ResponseDto(false, ERROR);
+    }
+
+    public ResponseDto<List<User>> getAllShowSearch(String search) {
+        if (!StringHelper.isValid(search)){
+            return new ResponseDto<>(false, "Word for searching cannot be blank(empty)");
+        }
+        List<User> genreList = userRepository.findAllUsersSearch(search);
+        return new ResponseDto<>(true, AppMessage.OK, genreList);
     }
 }

@@ -1,6 +1,8 @@
 package service;
 
+import entity.Author;
 import entity.Genre;
+import helper.StringHelper;
 import helper.Validation;
 import helper.messages.AppMessage;
 import mapper.GenreMapper;
@@ -102,5 +104,13 @@ public class GenreService {
                 .map(GenreMapper::toDto)
                 .collect(Collectors.toList());
         return new ResponseDto<>(true, AppMessage.OK, genreDtos);
+    }
+
+    public ResponseDto<List<Genre>> getAllShowSearch(String search) {
+        if (!StringHelper.isValid(search)){
+            return new ResponseDto<>(false, "Word for searching cannot be blank(empty)");
+        }
+         List<Genre> genreList = genreRepository.findAllGenresSearch(search);
+        return new ResponseDto<>(true, AppMessage.OK, genreList);
     }
 }

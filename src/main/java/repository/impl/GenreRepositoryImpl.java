@@ -147,4 +147,28 @@ public class GenreRepositoryImpl implements GenreRepository {
         }
         return null;
     }
+
+    @Override
+    public List<Genre> findAllGenresSearch(String search) {
+
+            List<Genre> genres = new ArrayList<>();
+            String GET_ALL_SEARCH_QUERY = "select * from genre where " +
+                    " upper(genre.name) like upper('%' || '" + search + "' || '%');";
+            try (Connection connection = new DBConnection().getConnection();
+                 Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(GET_ALL_SEARCH_QUERY);
+
+            ) {
+                while (resultSet.next()) {
+                    Integer id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    genres.add(new Genre(id, name));
+                }
+                return genres;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+    }
 }

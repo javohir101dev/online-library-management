@@ -19,4 +19,5 @@ public interface GenreRepository {
 
     public Integer getBookIdByGenreId(Integer genreId);
 
+    List<Genre> findAllGenresSearch(String search);
 }

@@ -242,4 +242,32 @@ public class BookUserRepositoryImpl implements BookUserRepository {
         return bookUserAllList;
     }
 
+    @Override
+    public List<BookUserAll> findAllBookUserAllSearch(String search) {
+        String GET_ALL_TAKEN_NUMBERS_SEARCH = " " +
+                " select bu.id, b.name, u.username, bu,takennumberofbooks " +
+                " from book_user bu " +
+                "         inner join book b on b.id = bu.bookid " +
+                "         inner join users u on u.id = bu.userid " +
+                " where upper(b.name || u.username) like upper('%' || '" + search + "' || '%');";
+        List<BookUserAll> bookUserAllList = new ArrayList<>();
+
+        try (Connection connection = new DBConnection().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(GET_ALL_TAKEN_NUMBERS_SEARCH)
+        ) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String username = resultSet.getString("username");
+                int takennumberofbooks = resultSet.getInt("takennumberofbooks");
+                BookUserAll bookUserAll = new BookUserAll(id, name, username, takennumberofbooks);
+                bookUserAllList.add(bookUserAll);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return bookUserAllList;
+    }
 }
