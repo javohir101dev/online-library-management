@@ -1,6 +1,7 @@
 package service;
 
 import entity.Author;
+import helper.StringHelper;
 import helper.Validation;
 import helper.messages.AppMessage;
 import mapper.AuthorMapper;
@@ -89,5 +90,14 @@ public class AuthorService {
         Author author = authorRepository.findById(id);
         return author == null ? new ResponseDto<>(false, AppMessage.ID_IS_NOT_FOUND) :
                 new ResponseDto<>(true, AppMessage.OK, AuthorMapper.toDto(author));
+    }
+
+    public ResponseDto<List<Author>> getAllShowSearch(String search) {
+        if (!StringHelper.isValid(search)){
+            return new ResponseDto<>(false, "Word for searching cannot be blank(empty)");
+        }
+        List<Author> allAuthorsSearch = authorRepository.findAllAuthorsSearch(search);
+        return new ResponseDto<>(true, AppMessage.OK, allAuthorsSearch);
+
     }
 }

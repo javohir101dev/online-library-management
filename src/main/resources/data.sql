@@ -9,11 +9,6 @@ create table if not exists genre
     name varchar not null unique
 );
 
--- Inserting genre info
-insert into genre(name)
-values ('Fantasy'),
-       ('Novel (Historical novel)'),
-       ('Fiction');
 
 -- Creating author table in database
 create table author
@@ -24,10 +19,6 @@ create table author
     birth_date timestamp
 );
 
--- Inserting author info
-insert into author(firstname, lastname, birth_date)
-VALUES ('Joanne ', 'Rowling ', '1965-07-31'),
-       ('Lev', 'Tolstoy', '1828-09-09');
 
 -- Creating users table in database
 create table users
@@ -40,11 +31,6 @@ create table users
     password     varchar not null,
     role         varchar not null
 );
-
--- Inserting user info
-insert into users(firstname, lastName, username, phone_number, password, role)
-VALUES ('Javohir', 'Uralov', 'admin', '+998950801467', '123', 'ADMIN'),
-       ('Izzatbek', 'Mavlonov', 'user', '+998901234567', '123', 'USER');
 
 
 -- Creating book table in database
@@ -64,27 +50,21 @@ alter table book
     add constraint fk_book_author_id foreign key (author_id) REFERENCES author (id);
 
 alter table book
-    add constraint fk_book_genre_id foreign key (genre_id) references genre(id);
+    add constraint fk_book_genre_id foreign key (genre_id) references genre (id);
 
--- Inserting info
-insert into book(name, cost, genre_id, page_count, total_number_of_books, left_number_of_books, author_id)
-VALUES ('Harry Potter and the Philosopher''s Stone', 23, 1, 223, 5, 5, 1),
-       ('Harry Potter and the Chamber of Secrets''s Stone', 27, 1, 251, 5, 5, 1),
-       ('Harry Potter and the Prisoner of Azkaban''s Stone', 32, 1, 317, 5, 5, 1),
-       ('Harry Potter and the Goblet of Fire', 43, 1, 636, 5, 5, 1),
-       ('War and Peace', 21.00, 2, 1225, 5, 5, 2);
+
 
 
 -- Creating book_user table in database
 create table book_user
 (
     id                 serial primary key,
-    takenDate          timestamp        default now(),
+    takenDate          timestamp default now(),
     returnedDate       timestamp,
-    bookId             integer not null ,
-    takenNumberOfBooks integer not null ,
-    userId             integer not null ,
-    isReturned         boolean default false
+    bookId             integer not null,
+    takenNumberOfBooks integer not null,
+    userId             integer not null,
+    isReturned         boolean   default false
 );
 
 alter table book_user
@@ -94,8 +74,48 @@ alter table book_user
     add constraint book_user_user_id foreign key (userId) references users (id);
 
 -- Inserting info
-insert into book_user(takenDate, returnedDate, bookId, takenNumberOfBooks, userId, isReturned)
-values (now(), null, 1, 3, 1, false),
-       (now(), null, 2, 1, 1, false),
-       (now(), null, 3, 1, 2, false),
-       (now(), null, 5, 1, 2, false);
+
+-- Genre
+insert into genre(name)
+values ('Fantasy'),
+       ('Novel (Historical novel)'),
+       ('Self-help book'),
+       ('Fiction'),
+       ('Romance'),
+       ('Thriller'),
+       ('Horror'),
+       ('Historical');
+
+
+-- Author
+insert into author(firstname, lastname, birth_date)
+VALUES ('Joanne ', 'Rowling ', '1965-07-31'),
+       ('Lev', 'Tolstoy', '1828-09-09'),
+--        ('Lev', 'Tolstoy', '1828-09-09'),
+       ('Cal', 'Newport', '1982-07-23')
+;
+
+
+-- Book
+insert into book(name, cost, genre_id, page_count, total_number_of_books, left_number_of_books, author_id)
+VALUES ('Harry Potter and the Philosopher''s Stone', 23, 1, 223, 10, 10, 1),
+       ('Harry Potter and the Chamber of Secrets''s Stone', 27, 1, 251, 10, 10, 1),
+       ('Harry Potter and the Prisoner of Azkaban''s Stone', 32, 1, 317, 10, 10, 1),
+       ('Harry Potter and the Goblet of Fire', 43, 1, 636, 10, 10, 1),
+       ('War and Peace', 21.00, 2, 1225, 5, 5, 2),
+       ('Deep Work', 17.16, 3, 300, 10, 10, 3);
+
+
+-- Book
+insert into users(firstname, lastName, username, phone_number, password, role)
+VALUES ('Javohir', 'Uralov', 'admin', '+998950801467', '123', 'ADMIN'),
+       ('Izzatbek', 'Mavlonov', 'user', '+998901234567', '123', 'USER'),
+       ('Muhammadali', 'Sagdiev', 'sf', '+998990111213', ' ', 'USER');
+
+
+
+-- insert into book_user(takenDate, returnedDate, bookId, takenNumberOfBooks, userId, isReturned)
+-- values (now(), null, 1, 3, 2, false),
+--        (now(), null, 2, 1, 2, false),
+--        (now(), null, 3, 1, 3, false),
+--        (now(), null, 5, 1, 3, false);

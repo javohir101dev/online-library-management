@@ -61,7 +61,7 @@
 
 <form action="/user/edit" method="get">
     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-        <button type="submit" class="btn btn-primary btn-lg">Edit Account</button>
+        <button value="${user.id}" name="id" type="submit" class="btn btn-primary btn-lg">Edit Account</button>
     </div>
 </form>
 

@@ -104,11 +104,11 @@ public class BookUserService {
         BookUser byUserIdAndBookId = bookUserRepository.findByUserIdAndBookId(userId, bookId);
         int leftNumberOfBooks = usersAllBooksCount - numberOfBooks;
         if (leftNumberOfBooks == 0) {
-            bookById.setLeftNumberOfBooks(bookById.getTotalNumberOfBooks());
+            bookById.setLeftNumberOfBooks(bookById.getLeftNumberOfBooks() + numberOfBooks);
             bookRepository.updateBookById(bookId, bookById);
             bookUserRepository.deleteBookUserById(byUserIdAndBookId.getId());
         } else {
-            bookById.setLeftNumberOfBooks(bookById.getTotalNumberOfBooks() - numberOfBooks);
+            bookById.setLeftNumberOfBooks(bookById.getLeftNumberOfBooks() + numberOfBooks);
             bookRepository.updateBookById(bookId, bookById);
             byUserIdAndBookId.setTakenNumberOfBooks(leftNumberOfBooks);
             byUserIdAndBookId.setReturnedDate(new Date());

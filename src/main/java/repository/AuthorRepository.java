@@ -1,6 +1,8 @@
 package repository;
 
 import entity.Author;
+import model.AuthorDto;
+import model.ResponseDto;
 
 import java.util.List;
 
@@ -45,4 +47,11 @@ public interface AuthorRepository {
      */
     public Integer authorBookWithAuthorId(Integer authorId);
 
+
+    /**
+     * Resturns book dto due to given search result
+     * @param search any word
+     * @return AuthorDto
+     */
+    List<Author> findAllAuthorsSearch(String search);
 }

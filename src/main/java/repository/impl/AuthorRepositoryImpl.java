@@ -2,6 +2,9 @@ package repository.impl;
 
 import entity.Author;
 import helper.DBConnection;
+import model.AuthorDto;
+import model.BookShow;
+import model.ResponseDto;
 import repository.AuthorRepository;
 
 import java.sql.*;
@@ -10,11 +13,12 @@ import java.util.List;
 
 public class AuthorRepositoryImpl implements AuthorRepository {
 
-    public AuthorRepositoryImpl(){
+    public AuthorRepositoryImpl() {
     }
+
     private static AuthorRepository authorRepository;
 
-    public static AuthorRepository getInstance(){
+    public static AuthorRepository getInstance() {
         if (authorRepository == null)
             authorRepository = new AuthorRepositoryImpl();
         return authorRepository;
@@ -25,14 +29,14 @@ public class AuthorRepositoryImpl implements AuthorRepository {
                 " VALUES\n" +
                 "    (?, ?, ? ) ; ";
         try (Connection connection = new DBConnection().getConnection();
-             PreparedStatement prepareStatement = connection.prepareStatement(INSERT_AUTHOR,  Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement prepareStatement = connection.prepareStatement(INSERT_AUTHOR, Statement.RETURN_GENERATED_KEYS);
         ) {
             prepareStatement.setString(1, author.getFirstname());
             prepareStatement.setString(2, author.getLastName());
             prepareStatement.setDate(3, author.getBirthDate());
             prepareStatement.execute();
             ResultSet generatedKeys = prepareStatement.getGeneratedKeys();
-            if (generatedKeys.next()){
+            if (generatedKeys.next()) {
                 Integer id = generatedKeys.getInt(1);
                 author.setId(id);
             }
@@ -42,6 +46,7 @@ public class AuthorRepositoryImpl implements AuthorRepository {
         }
         return author;
     }
+
     public List<Author> getAllAuthors() {
         List<Author> authorList = new ArrayList<>();
         String GET_ALL_AUTHORS = "select * from author";
@@ -58,7 +63,7 @@ public class AuthorRepositoryImpl implements AuthorRepository {
                 Author author = new Author(id,
                         firstname,
                         lastName,
-                       birthDate);
+                        birthDate);
                 authorList.add(author);
             }
         } catch (SQLException e) {
@@ -82,7 +87,7 @@ public class AuthorRepositoryImpl implements AuthorRepository {
                 return new Author(id,
                         firstname,
                         lastName,
-                      birthDate);
+                        birthDate);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -105,7 +110,7 @@ public class AuthorRepositoryImpl implements AuthorRepository {
             prepareStatement.setInt(4, authorId);
             prepareStatement.execute();
             ResultSet generatedKeys = prepareStatement.getGeneratedKeys();
-            if (generatedKeys.next()){
+            if (generatedKeys.next()) {
                 Integer id = generatedKeys.getInt(1);
                 author.setId(id);
             }
@@ -113,7 +118,7 @@ public class AuthorRepositoryImpl implements AuthorRepository {
             ex.printStackTrace();
             throw new RuntimeException(ex);
         }
-        return author.getId()== null ? null : author ;
+        return author.getId() == null ? null : author;
     }
 
     public boolean deleteAuthorById(Integer authorId) {
@@ -124,7 +129,7 @@ public class AuthorRepositoryImpl implements AuthorRepository {
             prepareStatement.setInt(1, authorId);
             prepareStatement.execute();
             ResultSet generatedKeys = prepareStatement.getGeneratedKeys();
-            if (generatedKeys.next()){
+            if (generatedKeys.next()) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -153,4 +158,33 @@ public class AuthorRepositoryImpl implements AuthorRepository {
         return bookId;
     }
 
+
+    @Override
+    public List<Author> findAllAuthorsSearch(String search) {
+        List<Author> authorList = new ArrayList<>();
+        String GET_ALL_AUTHORS = "select * from author where " +
+                " upper(author.firstname || author.lastname) like upper('%' || '" + search + "' || '%');";
+
+        try (Connection connection = new DBConnection().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(GET_ALL_AUTHORS)
+        ) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String firstname = resultSet.getString("firstname");
+                String lastName = resultSet.getString("lastName");
+                Date birthDate = resultSet.getDate("birth_date");
+                Author author = new Author(id,
+                        firstname,
+                        lastName,
+                        birthDate);
+                authorList.add(author);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return authorList;
+
+    }
 }
