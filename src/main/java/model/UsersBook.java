@@ -16,4 +16,5 @@ public class UsersBook {
     private Integer pageCount;
     private Double cost;
     private String author;
+    private Integer takenNumbers;
 }

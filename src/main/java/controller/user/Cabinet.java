@@ -23,6 +23,5 @@ public class Cabinet extends HttpServlet {
         } else {
             resp.sendRedirect("/user/login");
         }
-
     }
 }

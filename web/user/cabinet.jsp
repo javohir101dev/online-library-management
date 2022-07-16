@@ -35,6 +35,7 @@
             <th scope="col">Genre</th>
             <th scope="col">Pages</th>
             <th scope="col">Author</th>
+            <th scope="col">Taken Numbers</th>
         </tr>
         </thead>
         <tbody>
@@ -47,6 +48,7 @@
                 <td>${book.genre}</td>
                 <td>${book.pageCount}</td>
                 <td>${book.author}</td>
+                <td>${book.takenNumbers}</td>
             </tr>
         </c:forEach>
 

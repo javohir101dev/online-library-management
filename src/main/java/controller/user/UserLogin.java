@@ -49,9 +49,9 @@ public class UserLogin extends HttpServlet {
 
                 User user = (User) responseDto.getData();
                 req.setAttribute("user", user);
+                if (user.getRole().equals(USER.name())) {
                 List<UsersBook> bookList = bookRepository.usersBooksByUserId(user.getId());
                 req.setAttribute("books", bookList);
-                if (user.getRole().equals(USER.name())) {
                     RequestDispatcher requestDispatcher = req.getRequestDispatcher("/user/cabinet");
 //                    resp.sendRedirect("/user/cabinet");
                     requestDispatcher.forward(req, resp);
