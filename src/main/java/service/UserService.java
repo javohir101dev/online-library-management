@@ -58,26 +58,22 @@ public class UserService {
         if (validDtos.size() > 0) {
             return new ResponseDto(false, validDtos.toString());
         }
-        User userByNewUsername = userRepository.findUserByUsername(dto.getNewUsername());
-        if (userByNewUsername != null) {
+        User userByUsername = userRepository.findUserByUsernameAndIdNot(dto.getUsername(), Integer.parseInt(dto.getId()));
+        if (userByUsername != null) {
             return new ResponseDto(String
-                    .format("User with this: %s username is already taken", dto.getNewUsername()));
+                    .format("User with this: %s username is already taken", dto.getUsername()));
         }
-        User userByOldUsername = userRepository.findUserByUsername(dto.getOldUsername());
-        if (userByOldUsername == null) {
-            return new ResponseDto(String
-                    .format("User with this username: %s not found, please enter your old username correctly", dto.getOldUsername()));
-        }
+
         User user = User.builder()
-                .id(userByOldUsername.getId())
+                .id(Integer.parseInt(dto.getId()))
                 .firstname(dto.getFirstname())
                 .lastName(dto.getLastName())
-                .username(dto.getNewUsername())
+                .username(dto.getUsername())
                 .phoneNumber(dto.getPhoneNumber())
                 .password(dto.getPassword())
                 .role(Roles.USER.name())
                 .build();
-        User savedUser = userRepository.updateUserById(userByOldUsername.getId(), user);
+        User savedUser = userRepository.updateUserById(Integer.parseInt(dto.getId()), user);
         return new ResponseDto(true, "User is edited successfully", savedUser);
     }
 

@@ -49,17 +49,18 @@ public class UserEdit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            String id = req.getParameter("id");
             String firstname = req.getParameter("firstname");
             String lastName = req.getParameter("lastName");
-            String oldUsername = req.getParameter("oldUsername");
-            String newUsername = req.getParameter("newUsername");
+            String username = req.getParameter("username");
             String phoneNumber = req.getParameter("phoneNumber");
             String password = req.getParameter("password");
 //          if user registers it will be automatically registered with USER role
-            UserUpdateDto user = new UserUpdateDto(firstname, lastName, oldUsername, newUsername, phoneNumber, password);
+            UserUpdateDto user = new UserUpdateDto(id, firstname, lastName, username, phoneNumber, password);
             ResponseDto responseDto = userService.editUser(user);
             Message.print(req, resp, responseDto.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             Message.print(req, resp, "Please enter valid fields");
         }
     }

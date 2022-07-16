@@ -46,4 +46,6 @@ public interface UserRepository {
 
 
     List<User> findAllUsersSearch(String search);
+
+    public User findUserByUsernameAndIdNot(String username, Integer userId);
 }

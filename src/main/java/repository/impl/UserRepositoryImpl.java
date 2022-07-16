@@ -138,6 +138,35 @@ public class UserRepositoryImpl implements UserRepository {
         return null;
     }
 
+    public User findUserByUsernameAndIdNot(String username, Integer userId) {
+        String GET_USER_BY_USERNAME = "select * from users where username = '" + username + "' and id != " + userId;
+        try (Connection connection = new DBConnection().getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(GET_USER_BY_USERNAME)
+        ) {
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String firstname = resultSet.getString("firstname");
+                String lastName = resultSet.getString("lastName");
+                String _username = resultSet.getString("username");
+                String phoneNumber = resultSet.getString("phone_number");
+                String password = resultSet.getString("password");
+                String role = resultSet.getString("role");
+                return new User(id,
+                        firstname,
+                        lastName,
+                        _username,
+                        phoneNumber,
+                        password,
+                        role);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex);
+        }
+        return null;
+    }
+
     public User updateUserById(Integer userId, User user) {
         String UPDATE_USER_BY_ID = "update users set firstname = ?, " +
                 "lastName = ?, username = ?, phone_number = ?, password = ?, role = ? \n" +

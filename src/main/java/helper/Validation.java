@@ -72,14 +72,14 @@ public class Validation {
 
     public static List<ValidDto> checkUserUpdateDto(UserUpdateDto dto) {
         List<ValidDto> errors = new ArrayList<>();
-        if (!StringHelper.isValid(dto.getFirstname())) {
+        if (!IntegerHelper.isDigit(dto.getId())) {
+            errors.add(new ValidDto("Id", EMPTY));
+        } else if (!StringHelper.isValid(dto.getFirstname())) {
             errors.add(new ValidDto("firstname", EMPTY));
         } else if (!StringHelper.isValid(dto.getLastName())) {
             errors.add(new ValidDto("lastName", EMPTY));
-        } else if (!StringHelper.isValid(dto.getOldUsername())) {
-            errors.add(new ValidDto("oldUsername", EMPTY));
-        } else if (!StringHelper.isValid(dto.getNewUsername())) {
-            errors.add(new ValidDto("newUsername", EMPTY));
+        } else if (!StringHelper.isValid(dto.getUsername())) {
+            errors.add(new ValidDto("username", EMPTY));
         } else if (!StringHelper.isValid(dto.getPhoneNumber())) {
             errors.add(new ValidDto("phoneNumber", EMPTY));
         } else if (!StringHelper.isValid(dto.getPassword())) {

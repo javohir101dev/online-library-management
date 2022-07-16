@@ -27,6 +27,15 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
+                                        <input  readonly value="${user.id}" name="id" type="text"
+                                               id="form3Example0c" class="form-control"/>
+                                        <label class="form-label" for="form3Example0c">Id</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline flex-fill mb-0">
                                         <input value="${user.firstname}" name="firstname" type="text" placeholder="Firstname"
                                                id="form3Example1c" class="form-control"/>
                                         <label class="form-label" for="form3Example1c">Firstname</label>
@@ -45,19 +54,12 @@
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                     <div class="form-outline flex-fill mb-0">
-                                        <input value="${user.username}" name="oldUsername" placeholder="Old Username" type="text"
+                                        <input value="${user.username}" name="username" placeholder="Username" type="text"
                                                id="form3Example4c" class="form-control"/>
-                                        <label class="form-label" for="form3Example4c">Old Username</label>
+                                        <label class="form-label" for="form3Example4c">Username</label>
                                     </div>
                                 </div>
-                                <div class="d-flex flex-row align-items-center mb-4">
-                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                    <div class="form-outline flex-fill mb-0">
-                                        <input  name="newUsername" placeholder="New Username" type="text"
-                                               id="form3Example5c" class="form-control"/>
-                                        <label class="form-label" for="form3Example4c">New Username</label>
-                                    </div>
-                                </div>
+
 
                                 <div class="d-flex flex-row align-items-center mb-4">
                                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
