@@ -36,9 +36,11 @@
                 </h5>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book/getShow">Get
-                        all Books</a></li>
+                        all Books(Search)</a></li>
                     <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book/add">Add
                         Book</a></li>
+                    <li class="list-group-item"><a class="text-decoration-none text-dark links" href="/book/getAll">All
+                        Books</a></li>
                 </ul>
             </div>
         </li>
